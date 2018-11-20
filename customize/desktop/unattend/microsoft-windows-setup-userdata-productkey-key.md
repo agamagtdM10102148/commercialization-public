@@ -18,7 +18,7 @@ ms.topic: article
 # Key
 
 
-`Key` specifies the 29-character product key that determines which edition of Windows to install. Use the correct product key for the edition of Windows that you are installing. For more information about using product keys in answer files, see the [Work with Product Keys and Activation](http://go.microsoft.com/fwlink/?LinkId=206615) topic in the Windows Assessment and Deployment Kit (Windows ADK) Technical Reference.
+`Key` specifies the 25-character product key that determines which edition of Windows to install. Use the correct product key for the edition of Windows that you are installing. For more information about using product keys in answer files, see the [Work with Product Keys and Activation](http://go.microsoft.com/fwlink/?LinkId=206615) topic in the Windows Assessment and Deployment Kit (Windows ADK) Technical Reference.
 
 The product key that you use to activate the installation must match the number on the Certificate of Authenticity (COA) sticker that accompanies the retail product or that is physically attached to the computer case by the original equipment manufacturer (OEM).
 
