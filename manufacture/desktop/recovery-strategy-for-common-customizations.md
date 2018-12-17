@@ -77,13 +77,10 @@ ScanState’s /apps option also supports the following optional parameters:
 | `+/-sysdrive` | Specifies whether applications, files, and folders outside of the Windows namespace should be captured.<p>If `+sysdrive` is specified, all contents on the system drive are examined and eligible to be captured according to the discovery rules.<p>If `-sysdrive` is specified, only contents within the Windows namespace are examined and eligible to be captured according to the discovery rules.<p>`+sysdrive` is the default. |
 | `+/-oeminfo` | Specifies whether the OEM-specific help and support info should be captured.<p>If `+oeminfo` is specified, OEM and support info are captured.<p>If `-oeminfo` is specified, OEM and support info are not captured.<p>`+oeminfo` is the default. |
 
-
-
-
 **Important**  
 -   Although push-button reset features can restore multiple provisioning packages, only one of the packages can contain reference device data image captured using ScanState.
 -   ScanState should be used only after all customizations have been applied to the PC. It does not support appending additional changes to an existing reference device data image.
--   A provisioning package captured using ScanState.exe can only be applied using push-button reset features and deployment media created using Windows Imaging and Configuration Designer (ICD). It cannot be applied using tools such as DISM or USMT’s LoadState.exe.
+
 -   When you prepare ScanState for capturing customizations, you should exclude Windows Defender settings to prevent possible failures during recovery that can be caused by file conflicts. For more information, see Step 1 in [Deploy push-button reset features](deploy-push-button-reset-features.md).
 
 
