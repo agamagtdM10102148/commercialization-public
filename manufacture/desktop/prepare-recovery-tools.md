@@ -4,7 +4,7 @@ Description: Prepare recovery tools for your Windows images
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Prepare recovery tools for your Windows images
 ms.author: kenpacq
-ms.date: 11/16/2018
+ms.date: 12/18/2018
 ms.topic: article
 ms.custom: RS5
 ---
@@ -37,14 +37,37 @@ With a separate bare metal reset USB key, users can reset their devices when rep
 
 Some OEM customizations require additional steps to make sure that they get restored during a reset operation:
 
-| Customization | What do I need to update? |
-|------------|---------------------------|
-|**Universal Windows apps** | Automatically restored. |
-| **Drivers** installed using an .inf file | Automatically restored. |
-| **Windows desktop apps**, or **drivers** installed using an .exe file | [Capture into a provisioning package](deploy-push-button-reset-features.md). (Apps and drivers installed as [siloed provisioning packages (SPPs)](siloed-provisioning-packages.md) are automatically restored.)|
-| **Out of Box Experience customizations**, the **Start Menu**, and **Unattend.xml settings** | In Windows 10, version 1809, save a copy in your [Auto-apply folders](recovery-strategy-for-common-customizations.md#auto-apply). In earlier versions or as an alternative, use [extensibility scripts](recovery-strategy-for-common-customizations.md#restoring_settings_using_unattend.xml_and_extensibility_scripts) instead. |
-| **Drive partitions** | If your device uses a non-standard drive partition layout, [update bare-metal reset so users can create their own recovery media](bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md). |
-| Ship **USB recovery media** to customers | [Bare metal reset/recovery: create recovery media while deploying new devices](create-media-to-run-push-button-reset-features-s14.md). |
+<table>
+<tr><th>Customization</th><th>What do I need to update? </th></tr>
+<tr><td><b>Universal Windows apps</b>
+</td><td>Automatically restored.
+</td></tr>
+<tr><td><b>Drivers</b> installed using an .inf file
+</td><td>Automatically restored.
+</td></tr>
+<tr><td><b>Desktop apps</b> or <br/>
+<b>drivers</b> installed using an .exe file
+</td><td><a href="deploy-push-button-reset-features.md">Capture into a provisioning package</a> or a <a href="siloed-provisioning-packages.md">siloed provisioning package (SPP)</a>.
+</td></tr>
+<tr><td><b>Out of Box Experience customizations</b>, <br/>
+<b>Start Menu</b>, and <br/>
+<b>Unattend.xml settings</b>
+</td><td>In Windows 10, version 1809 and later, save a copy in your <a href="recovery-strategy-for-common-customizations.md#auto-apply">Auto-apply folders</a>. <br/>
+In earlier versions or as an alternative, use <a href="recovery-strategy-for-common-customizations.md#restoring_settings_using_unattend.xml_and_extensibility_scripts">extensibility scripts instead.
+</td></tr>
+<tr><td><b>Settings</b> created using Windows Configuration Designer (also known as ICD) 
+</td><td>Copy the settings .ppkg file to C:\Recovery\Customizations. 
+</td></tr>
+<tr><td><b>Drive partitions</b>
+</td><td>If your device uses a non-standard drive partition layout, <a href="bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md">update bare-metal reset so users can create their own recovery media.
+</td></tr>
+<tr><td>Ship <b>USB recovery media</b> to customers
+</td><td><a href="create-media-to-run-push-button-reset-features-s14.md">Bare metal reset/recovery: create recovery media while deploying new devices
+</td></tr>
+
+</table>
+
+
 
 More options: 
 

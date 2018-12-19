@@ -3,7 +3,7 @@ author: kpacquer
 Description: 'Push-button reset features are included with Windows 10 for desktop editions (Home, Pro, Enterprise, and Education), though you''ll need to perform additional steps to deploy PCs with the following customizations.'
 title: 'Deploy push-button reset features with auto-apply folders'
 ms.author: kenpacq
-ms.date: 10/02/2018
+ms.date: 12/19/2018
 ms.topic: article
 ms.custom: RS5
 ---
@@ -245,7 +245,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
 
     where N:\\ is the location where the additional provisioning packages are located.
 
-3.  Copy any Push-button reset configuration file (resetconfig.xml) and related scripts to the destination PC, and then configure permissions to write/modify them. For example:
+3.  Copy any Push-button reset configuration file (resetconfig.xml) to the destination PC, and then configure permissions to write/modify them. For example:
 
     ```cmd
     mkdir C:\Recovery\OEM
@@ -261,7 +261,10 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     icacls C:\Recovery\Customizations / grant:r *S-1-5-32-544:(F) /T
     icacls C:\Recovery\OEM /inheritance:r /T
     icacls C:\Recovery\OEM /grant:r SYSTEM:(F) /T
-    icacls C:\Recovery\OEM / grant:r *S-1-5-32-544:(F) /T
+    icacls C:\Recovery\OEM /grant:r *S-1-5-32-544:(F) /T
+    icacls C:\Recovery\AutoApply /inheritance:r /T
+    icacls C:\Recovery\AutoApply /grant:r SYSTEM:(F) /T
+    icacls C:\Recovery\AutoApply /grant:r *S-1-5-32-544:(F) /T
     attrib +H C:\Recovery
     ```
 
