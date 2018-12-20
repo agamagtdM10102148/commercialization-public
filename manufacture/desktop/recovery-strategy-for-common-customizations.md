@@ -5,7 +5,7 @@ ms.assetid: 909227f2-8969-4ab3-b296-c54977a38977
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Recovery components
 ms.author: kenpacq
-ms.date: 05/02/2017
+ms.date: 12/18/2018
 ms.topic: article
 ms.custom: RS5
 ---
@@ -23,9 +23,9 @@ Some settings and customizations cannot be included in provisioning packages. In
 
 ## <span id="auto-apply"></span>Auto-Apply folders
 
-**New in Windows 10, version 1809** Auto-apply folders make Push-button reset customizations easier to configure for the reset experience. This new method takes XML and related asset files and copies them to their corresponding location on the restored OS. Using Auto-apply folders simplifies the configuration process and helps to eliminate commonly-made mistakes that result in a misconfigured PBR.
+**New in Windows 10, version 1809** Auto-apply folders make Push-button reset customizations easier to configure for the reset experience. This new method copies and applies the most common Windows customization files after the device is reset. This can help simplify the configuration process and eliminate commonly-made mistakes that result in a misconfigured device.
 
-Auto-apply folders can't be used in conjunction with the legacy configuration method that utilizes extensibility points. 
+Auto-apply folders can't be used in conjunction with [extensibility points](add-a-script-to-push-button-reset-features.md). 
 
 > [!important]
 > If both extensibility points are configured and Auto-apply folders are present in C:\\Recovery, the Auto-apply folders will be ignored.
@@ -38,6 +38,7 @@ The following customizations are supported by Auto-apply folders:
 -    LayoutModification.xml
 -    OOBE
 -    Unattend.xml
+-    Any required asset files
 
 ### Configure Auto-apply
 
@@ -48,16 +49,14 @@ During a recovery, files in this AutoApply folder will get copied to the correct
 The following table shows the available customizations and where to copy the configuration and related asset files so that PBR can restore them to the restored OS:
 
 
-| Customization | Copy configuration to: | Copy related assets to: |
-| --- | --- | --- |
+| Customization                 | Copy configuration to:    | Copy related assets to:                     |
+| ----------------------------- | ------------------------- | ------------------------------------------- |
 | TaskbarLayoutModification.xml | C:\\Recovery\\AutoApply\\ | C:\\Recovery\\AutoApply\\Customizationfiles |
-| LayoutModification.xml | C:\\Recovery\\AutoApply\\ | C:\\Recovery\\AutoApply\\Customizationfiles |
-| OOBE.xml | Copy %windir%\\System32\\OOBE\info and all it's contents to C:\\Recovery\\AutoApply\\OOBE | N/A - The copied OOBE\\Info folder should include all the files to support OOBE |
-| Unattend.xml | C:\\Recovery\\AutoApply\\ | C:\\Recovery\\AutoApply\\CustomizationFiles |
-
+| LayoutModification.xml        | C:\\Recovery\\AutoApply\\ | C:\\Recovery\\AutoApply\\Customizationfiles |
+| OOBE.xml                      | Copy %windir%\\System32\\OOBE\info and all it's contents to C:\\Recovery\\AutoApply\\OOBE | N/A - The copied OOBE\\Info folder should include all the files to support OOBE |
+| Unattend.xml                  | C:\\Recovery\\AutoApply\\ | C:\\Recovery\\AutoApply\\CustomizationFiles |
 
 ## <span id="desktop-apps"></span>Capturing Windows desktop applications using Windows User State Migration Tool (USMT)'s ScanState tool
-
 
 The Windows User State Migration Tool (USMT) ScanState.exe has been updated in Windows 10 to support capturing Windows desktop applications applications. This functionality can be activated by specifying the `/apps` option.
 

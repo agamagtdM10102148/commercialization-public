@@ -5,7 +5,7 @@ ms.assetid: 6390f427-a201-487e-928f-964e7b84327c
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: 'Features On Demand'
 ms.author: kenpacq
-ms.date: 06/27/2018
+ms.date: 12/19/2018
 ms.topic: article
 ms.custom: RS5
 ---
@@ -53,9 +53,7 @@ OEMs can generally add FODs to their Windows images using `DISM /add-package`, u
 | /add-package | Adds a package, including a FOD .cab to an image. `add-package` can only be used to add FODs that don't have satellite packages. | `DISM.exe /image:C:\mount\Windows /add-package /packagepath:E:\Microsoft-Windows-Holographic-Desktop-FOD-Package~31bf3856ad364e35~amd64~~.cab` |
 | /Get-Packages | Get a list of all packages in an image. | `DISM /image:C:\Mount\Windows /get-packages` |
 | /Get-Packageinfo | Get information of a package in an image. | `DISM /image:C:\mount\Windows /get-packageInfo /packagename:Microsoft-Windows-Xps-Xps-Viewer-Opt-Package~31bf3856ad364e35~amd64~~10.0.17134.1000` |
-| /Remove-Package | <p>Removes a package from an image.</p>**Note**: Don't remove a package that other packages depend on. For example, if you have the French handwriting and basic packages installed, don't remove the basic package.</p> | `DISM.exe /image:C:\mount\Windows /remove-capability /CapabilityName:Microsoft-Windows-Xps-Xps-Viewer-Opt-Package~31bf3856ad364e35~amd64~~10.0.17134.1000` |
-
-
+| /Remove-Package | Removes a package from an image. Note: Don't remove a package that other packages depend on. For example, if you have the French handwriting and basic packages installed, don't remove the basic package. | `DISM.exe /image:C:\mount\Windows  /Remove-Package /PackageName:Microsoft.Windows.Calc.Demo~6595b6144ccf1df~x86~en~1.0.0.0` |
 
 ### Using DISM /add-capability to add or remove FODs
 
