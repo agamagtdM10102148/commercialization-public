@@ -36,8 +36,6 @@ More options:
 ## [Push-button reset](push-button-reset-overview.md)
 Windows 10 users can reset their device, either keeping data and apps intact or resetting it for a new user. 
 
-With a separate **bare-metal reset** USB key, users can reset their devices even when replacing the hard drive.
-
 Some customizations that you add to Windows should also be added to the push-button reset tools:
 
 <table>
@@ -61,6 +59,20 @@ In earlier versions or as an alternative, use <a href="recovery-strategy-for-com
 <tr><td><b>Settings</b> created using Windows Configuration Designer (also known as ICD) 
 </td><td>Copy the settings .ppkg file to C:\Recovery\Customizations. 
 </td></tr>
+</table>
+
+
+
+More options: 
+
+* Use [Compact OS, single-sourcing, and image optimization](compact-os.md) to save space on the disk.
+
+## [Bare metal recovery](bare-metal-recovery.md)
+If the user needs to replace their hard drive or completely wipe it, they can use bootable USB key to restore their device.
+
+Some customizations that you add to Windows should also be added to the push-button reset tools:
+<table>
+<tr><th>Customization</th><th>What do I need to update? </th></tr>
 <tr><td><b>Drive partitions</b>
 </td><td>If your device uses a non-standard drive partition layout, <a href="bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md">update bare-metal reset so users can create their own recovery media.
 </td></tr>
@@ -69,12 +81,6 @@ In earlier versions or as an alternative, use <a href="recovery-strategy-for-com
 </td></tr>
 
 </table>
-
-
-
-More options: 
-
-* Use [Compact OS, single-sourcing, and image optimization](compact-os.md) to save space on the disk.
 
 ## Reference
 * [How push-button reset features work](how-push-button-reset-features-work.md)

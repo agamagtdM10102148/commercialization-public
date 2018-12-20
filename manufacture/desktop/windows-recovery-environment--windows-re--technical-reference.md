@@ -124,6 +124,35 @@ For more info about configuring hard drive partitions, see [Configure UEFI/GPT-B
 
 In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize memory use, manufacturers should ensure that their firmware reserves memory locations either at the beginning or at the end of the physical memory address space.
 
+## <span id="Updating_the_on-disk_Windows_Recovery_Environment"></span><span id="updating_the_on-disk_windows_recovery_environment"></span><span id="UPDATING_THE_ON-DISK_WINDOWS_RECOVERY_ENVIRONMENT"></span>Updating the on-disk Windows Recovery Environment
+
+
+In Windows 10, the on-disk copy of Windows RE can be serviced as part of rollup updates for the OS. Not all rollup updates will service Windows RE.
+
+Unlike the normal OS update process, updates for Windows RE do not directly serviced the on-disk Windows RE image (winre.wim). Instead, a newer version of the Windows RE image replaces the existing one, with the following contents being injected or migrated into the new image:
+
+-   Boot critical and input device drivers from the full OS environment are added to the new Windows RE image.
+-   Windows RE customizations under \\Sources\\Recovery of the mounted winre.wim are migrated to the new image.
+
+The following contents from the existing Windows RE image are not migrated to the new image:
+
+-   Drivers which are in the existing Windows RE image but not in the full OS environment
+-   Windows PE optional components which are not part of the default Windows RE image
+-   Language packs for Windows PE and optional components
+
+The Windows RE update process makes every effort to reuse the existing Windows RE partition without any modification. However, in some rare situations where the new Windows RE image (along with the migrated/injected contents) does not fit in the existing Windows RE partition, the update process will behave as follows:
+
+-   If the existing Windows RE partition is located immediately after the Windows partition, the Windows partition will be shrunk and space will be added to the Windows RE partition. The new Windows RE image will be installed onto the expanded Windows RE partition.
+-   If the existing Windows RE partition is not located immediately after the Windows partition, the Windows partition will be shrunk and a new Windows RE partition will be created. The new Windows RE image will be installed onto this new Windows RE partition. The existing Windows RE partition will be orphaned.
+-   If the existing Windows RE partition cannot be reused and the Windows partition cannot successfully be shrunk, the new Windows RE image will be installed onto the Windows partition. The existing Windows RE partition will be orphaned.
+
+**Important**  To ensure that your customizations continue to work after Windows RE has been updated, they must not depend on functionalities provided by Windows PE optional components which are not in the default Windows RE image (e.g. WinPE-NetFX). To facilitate development of Windows RE customizations, the WinPE-HTA optional component has been added to the default Windows RE image in Windows 10.
+
+ 
+
+**Note**  The new Windows RE image deployed as part of the rollup update contains language resources only for the system default language, even if the existing Windows RE image contains resources for multiple languages. On most PCs, the system default language is the language selected at the time of OOBE.
+
+
 ## <span id="BKMK_LINKS"></span><span id="bkmk_links"></span>See also
 
 

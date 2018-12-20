@@ -99,7 +99,7 @@ Most settings which are configured using unattend.xml and other configuration fi
 
 
 
-To learn how to author scripts to be run using extensibility points, see [Add a script to push-button reset features](add-a-script-to-push-button-reset-features.md).
+To learn how to author scripts to be run using extensibility points, see [Add extensibility scripts to push-button reset](add-a-script-to-push-button-reset-features.md).
 
 To learn how to use ScanState to capture and store the resulting PPKG under C:\\Recovery\\Customizations, which is restored automatically during PBR, see [Deploy push-button reset features using ScanState](deploy-push-button-reset-features.md).
 

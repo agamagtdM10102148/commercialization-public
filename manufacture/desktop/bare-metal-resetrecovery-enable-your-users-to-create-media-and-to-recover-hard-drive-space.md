@@ -25,7 +25,7 @@ If you're deploying Windows with a custom partition layout, you'll need to add a
 -   A **partition reset script**, which is a modified DiskPart script that resets your custom partition layout.
 -   A **push-button reset configuration file** ([ResetConfig XML](resetconfig-xml-reference-s14.md)) that identifies the Windows and Windows RE partitions.
 
-**Note:** In Windows 10, version 1607, desktop applications and settings captured in [siloed provisioning packages](siloed-provisioning-packages.md) will not be restored using this media. Regular customizations packages (.ppkg) captured using the ScanState tool are not affected by this issue. 
+**Note:** In Windows 10, version 1607 and later, desktop applications and settings captured in [siloed provisioning packages](siloed-provisioning-packages.md) will not be restored using this media. Regular customizations packages (.ppkg) captured using the ScanState tool are not affected by this issue. 
 
 ## <span id="CreateConfigFiles"></span><span id="createconfigfiles"></span><span id="CREATECONFIGFILES"></span>Creating configuration files
 
@@ -200,7 +200,7 @@ Users can use this option to create recovery media when needed.
 1.  On a computer that has no operating system, insert your recovery media.
 2.  Start the computer, press a key to open the firmware boot menus, and then select the appropriate boot device.
 3.  At the **Windows RE Tools** menus, select a keyboard layout, for example, **US**.
-4.  Click **Troubleshoot** &gt; **Reset your PC** &gt; **Next**. If you're prompted to clean the drive, select **Yes**.
+4.  Click **Troubleshoot** &gt; **Remove everything** &gt; **Next**. If you're prompted to clean the drive, select **Yes**.
 5.  Select **Yes, repartition the drives** &gt; **Just remove my files** &gt; **Reset**.
 
 **Troubleshooting:**

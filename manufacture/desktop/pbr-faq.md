@@ -79,15 +79,15 @@ ms.topic: article
 <td align="left">Updates are always restored during recovery. DISM.exe’s /Cleanup-Image command with the /StartComponentCleanup and /ResetBase options are no longer required to mark all installed OS updates as permanent</td>
 </tr>
 <tr class="even">
-<td align="left">I have files that need to be persisted/restored when Reset your PC and Refresh your PC are performed, but I don’t want to capture them using ScanState. Where should I put these files?</td>
-<td align="left">All contents under C:\Recovery\OEM are left unmodified during Reset your PC and Refresh your PC. However, it should be noted that these contents will also be backed up onto the USB recovery media when using the Create a recovery drive utility.</td>
+<td align="left">I have files that need to be persisted/restored when Remove everything and Keep my files are performed, but I don’t want to capture them using ScanState. Where should I put these files?</td>
+<td align="left">All contents under C:\Recovery\OEM are left unmodified during Remove everything and Keep my files. However, it should be noted that these contents will also be backed up onto the USB recovery media when using the Create a recovery drive utility.</td>
 </tr>
 <tr class="odd">
-<td align="left">I can’t find the Refresh your PC option in Settings or Windows RE anymore. Where did the feature go?</td>
-<td align="left">Both Refresh your PC and Reset your PC are now part of the same user experience, under the Reset this PC option in Settings and in Windows RE. When you launch the Reset this PC experience, you’ll see additional options:
+<td align="left">I can’t find the Keep my files option in Settings or Windows RE anymore. Where did the feature go?</td>
+<td align="left">Both Keep my files and Remove everything are now part of the same user experience, under the Reset this PC option in Settings and in Windows RE. When you launch the Reset this PC experience, you’ll see additional options:
 <ul>
-<li><strong>Keep my files</strong> – This initiates the Refresh your PC feature.</li>
-<li><strong>Remove everything</strong> – This initiates the Reset your PC feature.</li>
+<li><strong>Keep my files</strong> – This initiates the Keep my files feature.</li>
+<li><strong>Remove everything</strong> – This initiates the Remove everything feature.</li>
 <li><strong>Restore factory settings</strong> – On PCs upgraded from Windows 8/8.1, this initiates factory recovery using the existing recovery image.</li>
 </ul></td>
 </tr>
@@ -96,7 +96,7 @@ ms.topic: article
 <td align="left">The /drivers option is not required if the provisioning package being created is to be used for Push-button reset features. Push-button reset features persist the drivers which are already installed, making it unnecessary to reapply the factory-preinstalled drivers. Note: Driver applets installed outside of the driver INF package are captured using ScanState’s /apps option.</td>
 </tr>
 <tr class="odd">
-<td align="left">How much available disk space is required in order for the Refresh your PC feature to run successfully?</td>
+<td align="left">How much available disk space is required in order for the Keep my files feature to run successfully?</td>
 <td align="left">If you have converted the installed customizations into file pointers referencing the customizations package created using ScanState, the required disk space is: 4GB + size_of_ppkg<em>0.2
 <p>Otherwise, the required disk space is: 4GB + size_of_ppkg</em>2</p></td>
 </tr>
@@ -105,10 +105,10 @@ ms.topic: article
 <td align="left">No. Windows continues to support 128MB MSR partitions. However, on PCs with limited storage capacity, a 16MB MSR partition is recommended to give end users as much available storage as possible.</td>
 </tr>
 <tr class="odd">
-<td align="left">Is there any known issue with using Reset your PC to restore PCs back to factory condition after going through factory floor testing?</td>
-<td align="left">Although PBR features are not intended to be used on factory floors, there’s no technical limitation which prevents it. However, keep the following in mind when using Reset your PC on the factory floor:
+<td align="left">Is there any known issue with using Remove everything to restore PCs back to factory condition after going through factory floor testing?</td>
+<td align="left">Although PBR features are not intended to be used on factory floors, there’s no technical limitation which prevents it. However, keep the following in mind when using Remove everything on the factory floor:
 <ul>
-<li>If your factory floor testing includes activating Windows, Reset your PC will not revert the unit back to an non-activated state</li>
+<li>If your factory floor testing includes activating Windows, Remove everything will not revert the unit back to an non-activated state</li>
 <li>Preinstalled RDX contents will be removed</li>
 <li>If the unit is not reset for multiple days after factory validation but remains powered on, the preinstalled languages except for the one selected during OOBE will be removed during maintenance</li>
 <li>End users will be able to tell that a unit has been reset during factory by looking for the PBR logs under C:\Windows\Logs\PBR</li>

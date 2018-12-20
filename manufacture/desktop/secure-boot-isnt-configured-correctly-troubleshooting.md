@@ -67,7 +67,7 @@ Be careful when changing BIOS settings. The BIOS menu is designed for advanced u
 
 4.  If the PC is not able to boot after enabling Secure Boot, go back into the BIOS menus, disable Secure Boot, and try to boot the PC again.
 
-5.  In some cases, you may need to refresh or reset your PC to its original state before you can turn on Secure Boot. For more info, see [How to restore, refresh, or reset your PC](http://go.microsoft.com/fwlink/p/?linkid=279534).
+5.  In some cases, you may need to refresh or Remove everything to its original state before you can turn on Secure Boot. For more info, see [How to restore, refresh, or Remove everything](http://go.microsoft.com/fwlink/p/?linkid=279534).
 
 6.  If the above steps don’t work, and you still want to use the Secure Boot feature, contact your manufacturer for help.
 

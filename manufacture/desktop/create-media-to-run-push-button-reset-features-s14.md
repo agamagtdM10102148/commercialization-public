@@ -134,7 +134,7 @@ To create the recovery media that you can include with the PC, you must have the
 1.  On a PC with an empty hard drive, insert your new recovery media.
 2.  Start the PC, press a key to open the firmware boot menus, and then select the appropriate boot device.
 3.  At the **Windows RE Tools** menus, select a keyboard layout, for example, **US**.
-4.  Click **Troubleshoot** &gt; **Reset your PC** &gt; **Next**
+4.  Click **Troubleshoot** &gt; **Remove everything** &gt; **Next**
 
     **Note**  
     If you are testing on the same PC, and you have not cleaned the hard drive, you may be prompted to select a drive. Select Windows 10.

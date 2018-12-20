@@ -288,7 +288,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
 
 ## Step 7: Verify your customizations
 
-1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Refresh your PC and Reset your PC features from the following entry points:
+1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features from the following entry points:
 
     **Settings :** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
 
@@ -302,7 +302,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     4.  From the Choose an option screen, click **Troubleshoot**
     5.  Click **Recover from a drive** and then follow the on-screen instructions
 
-    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Refresh your PC** feature, whereas the **Remove everything** option corresponds to the **Reset your PC** feature.
+    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Keep my files** feature, whereas the **Remove everything** option corresponds to the **Remove everything** feature.
 
      
 

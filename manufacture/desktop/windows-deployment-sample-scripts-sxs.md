@@ -651,7 +651,7 @@ rem Recommended: Create a pagefile for devices with 1GB or less of RAM.
 wpeutil CreatePageFile /path=%TARGETOSDRIVE%\PageFile.sys /size=256
 ```
 
-To learn more about using extensibility points for push-button reset, see [Add a script to push-button reset features](http://go.microsoft.com/fwlink/?LinkId=618946).
+To learn more about using extensibility points for push-button reset, see [Add extensibility scripts to push-button reset](http://go.microsoft.com/fwlink/?LinkId=618946).
 
 ## <span id="Reinstall_Windows_inbox_apps"></span>Reinstall Windows inbox apps
 
