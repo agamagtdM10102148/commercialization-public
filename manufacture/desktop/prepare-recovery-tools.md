@@ -11,12 +11,15 @@ ms.custom: RS5
 
 # Prepare recovery tools for your Windows images
 
-When you’re creating Windows 10 and Windows Server images, update the recovery tools.
+> [!Tip]
+> If you want to reset a computer that runs Windows 10, see [Recovery options in Windows 10](http://windows.microsoft.com/en-us/windows-10/windows-10-recovery-options).
+
+OEMs: When you create custom Windows 10 and Windows Server images, update the recovery tools.
 
 ## [Windows Recovery Environment (Windows RE)](windows-recovery-environment--windows-re--technical-reference.md)
 Both Windows 10 and Windows Server include a recovery environment that can repair common causes of unbootable operating systems.
 
-Some customizations that you add to Windows should also be added to Windows RE to help make sure the systems can be restored:
+Some customizations that you add to Windows should also be added to Windows RE:
 
 | Customization | What do I need to update? | 
 |---------------|---------------------------|
@@ -33,9 +36,9 @@ More options:
 ## [Push-button reset](push-button-reset-overview.md)
 Windows 10 users can reset their device, either keeping data and apps intact or resetting it for a new user. 
 
-With a separate bare metal reset USB key, users can reset their devices when replacing the hard drive.
+With a separate **bare-metal reset** USB key, users can reset their devices even when replacing the hard drive.
 
-Some OEM customizations require additional steps to make sure that they get restored during a reset operation:
+Some customizations that you add to Windows should also be added to the push-button reset tools:
 
 | Customization | What do I need to update? |
 |------------|---------------------------|
