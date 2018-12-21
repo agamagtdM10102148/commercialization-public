@@ -77,7 +77,7 @@ Some customizations that you add to Windows should also be added to the push-but
 </td><td>If your device uses a non-standard drive partition layout, <a href="bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md">update bare-metal reset so users can create their own recovery media.
 </td></tr>
 <tr><td>Ship <b>USB recovery media</b> to customers
-</td><td><a href="create-media-to-run-push-button-reset-features-s14.md">Bare metal reset/recovery: create recovery media while deploying new devices
+</td><td><a href="create-media-to-run-push-button-reset-features-s14.md">Create recovery media while deploying new devices
 </td></tr>
 
 </table>
