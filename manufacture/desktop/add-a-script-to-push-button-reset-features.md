@@ -79,7 +79,7 @@ for /F "tokens=1,2,3 delims= " %%A in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\M
 rem Define %TARGETOSDRIVE% as the Windows partition (This later becomes C:)
 for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
 
-rem Add back Windows settings, Start menu, and OOBE.xml customizations
+rem Add back Windows settings, Start menu, Taskbar, and OOBE.xml customizations
 copy "%TARGETOSDRIVE%\Recovery\OEM\Unattend.xml" "%TARGETOS%\Panther\Unattend.xml" /y
 copy "%TARGETOSDRIVE%\Recovery\OEM\LayoutModification.xml" "%TARGETOSDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml" /y
 copy "%TARGETOSDRIVE%\Recovery\OEM\TaskbarLayoutModification.xml" "%TARGETOS%\OEM\TaskbarLayoutModification.xml" /y
