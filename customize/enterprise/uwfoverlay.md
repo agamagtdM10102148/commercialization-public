@@ -123,12 +123,12 @@ When Windows shuts down, it attempts to write a number of files to the disk. If 
 You can often avoid this issue by using UWF to automatically initiate the shut down or restart:
 
 * **Shut down**: 
-  * [CMD](uwfmgrexe.md): `uwfmgr shutdown`
+  * [CMD](uwfmgrexe.md): `uwfmgr filter shutdown`
   * [CSP](https://docs.microsoft.com/windows/client-management/mdm/unifiedwritefilter-csp): `ShutdownSystem`
   * [WMI](uwf-filtershutdownsystem.md): `UWF\Filter.ShutdownSystem`
 
 * **Restart**: 
-  * [CMD](uwfmgrexe.md): `uwfmgr restart`
+  * [CMD](uwfmgrexe.md): `uwfmgr filter restart`
   * [CSP](https://docs.microsoft.com/windows/client-management/mdm/unifiedwritefilter-csp): `RestartSystem`
   * [WMI](uwf-filterrestartsystem.md): `UWF\Filter.RestartSystem`
      
