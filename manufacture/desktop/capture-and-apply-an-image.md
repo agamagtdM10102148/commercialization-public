@@ -9,19 +9,17 @@ ms.topic: article
 ms.custom: RS5
 ---
 
-# Capture and apply a Windows image
+# Capture and apply a Windows .WIM image
 
-This section covers how to capture and apply a Windows image.
+This section covers how to capture and apply a Windows WIM image.
 
  ## In this section
 
 | Topic | Description |
 |  --- | ---  |
-| [Create and Manage a Windows Image Using DISM](create-and-manage-a-windows-image-using-dism.md) | How to use DISM to create and manage a Windows image |
-| [Capture Images of Hard Disk Partitions Using DISM](capture-images-of-hard-disk-partitions-using-dism.md) | How to capture a hard disk image using DISM |
-| [Create a WIM for Multiple Architecture Types Using DISM](create-a-wim-for-multiple-architecture-types-using-dism.md) | How to create an image that supports more than one architecture |
-| [Split a Windows image file (.wim) to span across multiple DVDs](split-a-windows-image--wim--file-to-span-across-multiple-dvds.md) | How to split a Windows image across multiple media |
-| [Append a Volume Image to an Existing Image Using DISM](append-a-volume-image-to-an-existing-image-using-dism--s14.md) | How to combine Windows images into a single image |
-| [Create a Data Image Using DISM](create-a-data-image-using-dism.md) | How to create an image that contains data instead of a Windows image |
-| [Apply Images Using DISM](apply-images-using-dism.md) | How to use DISM to apply a Windows image |
-| [Capture and Apply Windows, System, and Recovery Partitions](capture-and-apply-windows-system-and-recovery-partitions.md) | How to capture and apply |
+| [Capture and Apply Windows using a single WIM file](capture-and-apply-windows-using-a-single-wim.md) | If you're using a standard partition configuration, use this method to capture and apply WIMs. |
+| [Capture and Apply Windows, System, and Recovery Partitions](capture-and-apply-windows-system-and-recovery-partitions.md) | If you've got a custom partition configuration, use this method to capture and apply WIMs. |
+| [Create a WIM for Multiple Architecture Types ](create-a-wim-for-multiple-architecture-types-using-dism.md) | How to create an image that supports more than one architecture |
+| [Split a Windows image file (.wim) to span across multiple DVDs](split-a-windows-image--wim--file-to-span-across-multiple-dvds.md) | Split a large .wim file into several smaller files that will fit on your selected media.  |
+| [Append a Volume Image to an Existing Image Using DISM](append-a-volume-image-to-an-existing-image-using-dism--s14.md) | Save drive space on your deployment server by storing multiple variations of Windows images in a single WIM file. |
+| [Create a Data WIM Image](create-a-data-image-using-dism.md) | How to create an image that contains data instead of a Windows image |

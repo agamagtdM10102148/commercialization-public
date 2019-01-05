@@ -1,6 +1,6 @@
 ---
 author: kpacquer
-Description: Capture Images of Hard Disk Partitions Using DISM
+Description: Capture WIM Images of Hard Disk Partitions Using DISM
 ms.assetid: 164b9185-402f-4afb-bcf5-ef2f37077ed6
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Capture Images of Hard Disk Partitions Using DISM
@@ -8,39 +8,37 @@ ms.author: kenpacq
 ms.date: 05/02/2017
 ms.topic: article
 
-
+redirect_url: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/capture-and-apply-using-a-single-wim.md
 ---
+<!--
 
-# Capture Images of Hard Disk Partitions Using DISM
+# Capture Images of Hard Disk Partitions Using WIM files
 
+When capturing a Windows image using .WIM files, you usually can just capture the Windows partition, and then use files from that image to set up the rest of the partitions on the drive. See [Capture and Apply Windows, System, and Recovery Partitions](capture-and-apply-windows-system-and-recovery-partitions.md).
 
-You can use the Deployment Image Servicing and Management (DISM) tool to capture an image of your hard disk for deployment and save it as a Windows® image (.wim) file. To see how this information applies to Windows, system, and recovery partitions, see [Capture and Apply Windows, System, and Recovery Partitions](capture-and-apply-windows-system-and-recovery-partitions.md).
+However, if you're using custom partitions, use this topic to learn more about the individual partititions to capture and apply.
 
 ## <span id="Prerequisites"></span><span id="prerequisites"></span><span id="PREREQUISITES"></span>Prerequisites
-
 
 1.  Windows PE. See [WinPE: Create USB Bootable drive](winpe-create-usb-bootable-drive.md).
 
 2.  A reference computer. You can create a reference computer by deploying Windows, and then removing the computer-specific information from the system. For more information, see [Sysprep (Generalize) a Windows installation](sysprep--generalize--a-windows-installation.md).
 
-## <span id="Step_1__Determining_Which_Partitions_to_Capture"></span><span id="step_1__determining_which_partitions_to_capture"></span><span id="STEP_1__DETERMINING_WHICH_PARTITIONS_TO_CAPTURE"></span>Step 1: Determining Which Partitions to Capture
-
+## Step 1: Determine which partitions to capture
 
 This table shows the types of partitions that you must capture and those that are managed automatically.
 
+If you're deploying both UEFI and BIOS systems, you can reuse your primary and logical partitions across UEFI-based and BIOS-based devices, but not the other partition types.
 
-| Partition type | Should you capture this partition? |
+| Partition type | Should you capture this partition? | Reuse across UEFI and BIOS systems? |
 | --- | --- |
-| **System partition** (BIOS system partition or EFI System Partition) | Optional<p><p>If only a simple set of partition files is required, you don’t have to capture this partition. |
-| **Microsoft Reserved partition (MSR)** | No |
-| **Primary partitions** (Windows partitions, utility partitions) | Yes |
-| **Extended partition** | No |
-| **Logical partitions** (Windows partitions, utility partitions) | Yes |
+| **System partition** (EFI System Partition or BIOS system partition) | Optional. If only a simple set of partition files is required, you don’t have to capture this partition. | No | 
+| **Microsoft Reserved partition (MSR)** | No | No |
+| **Primary partitions** (Windows partitions, utility partitions that you've added) | Yes | Yes |
+| **Extended partition** | No | No |
+| **Logical partitions** (Windows partitions, utility partitions that you've added) | Yes | Yes |
 
-You can capture and apply images between partitions on BIOS-based and UEFI-based computers, because the Windows image isn’t affected by the firmware. For more information, see [Capture and Apply Windows, System, and Recovery Partitions](capture-and-apply-windows-system-and-recovery-partitions.md).
-
-## <span id="Step_2__Assign_Drive_Letters_to_Partitions"></span><span id="step_2__assign_drive_letters_to_partitions"></span><span id="STEP_2__ASSIGN_DRIVE_LETTERS_TO_PARTITIONS"></span>Step 2: Assign Drive Letters to Partitions
-
+## Step 2: Assign drive letters to partitions
 
 If any of the partitions you want to capture don’t already have a drive letter assigned, assign a letter using the **DiskPart** tool.
 
@@ -103,12 +101,11 @@ If any of the partitions you want to capture don’t already have a drive letter
 
 For more information, see the DiskPart Help from the command line, or [Diskpart Command line syntax](http://go.microsoft.com/fwlink/?LinkId=128458).
 
-## <span id="Step_3__Capture_Partition_Images_using_DISM"></span><span id="step_3__capture_partition_images_using_dism"></span><span id="STEP_3__CAPTURE_PARTITION_IMAGES_USING_DISM"></span>Step 3: Capture Partition Images using DISM
-
+## Step 3: Capture partitions
 
 Capture images for each customized partition.
 
--   At the Windows PE command prompt, capture the images by using the **DISM** command together with the **/captureImage** option. For example,
+-   At the Windows PE command prompt, capture the images by using the **DISM** command together with the **/CaptureImage** option. For example,
 
     ```
     Dism /Capture-Image /ImageFile:c:\my-windows-partition.wim /CaptureDir:C:\ /Name:"My Windows partition"
@@ -117,12 +114,9 @@ Capture images for each customized partition.
 
     For more information about using the DISM tool to capture an image, see [DISM Image Management Command-Line Options](dism-image-management-command-line-options-s14.md).
 
-## <span id="Step_4__Save_Images_to_the_Network"></span><span id="step_4__save_images_to_the_network"></span><span id="STEP_4__SAVE_IMAGES_TO_THE_NETWORK"></span>Step 4: Save Images to the Network
+## Step 4: Save images to the network or another safe location.
 
-
-Save your .wim files to your network or another safe location.
-
-1.  Connect to your distribution share by using the **net use** command. For example,
+1.  Connect an external drive, or connect to a safe network location, for example: 
 
     ```
     net use n: \\Server\Share
@@ -162,12 +156,4 @@ After the image is captured and stored, you can:
 
 [Boot to VHD (Native Boot): Add a Virtual Hard Disk to the Boot Menu](boot-to-vhd--native-boot--add-a-virtual-hard-disk-to-the-boot-menu.md)
 
- 
-
- 
-
-
-
-
-
-
+-->

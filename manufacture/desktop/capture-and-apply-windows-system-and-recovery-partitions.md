@@ -13,48 +13,150 @@ ms.topic: article
 
 # Capture and Apply Windows, System, and Recovery Partitions
 
+When capturing a Windows image using .WIM files, you usually can just capture the Windows partition, and then use files from that image to set up the rest of the partitions on the drive. See [Capture and Apply Windows using a single WIM file](capture-and-apply-windows-using-a-single-wim.md).
 
-Capture a Windows image (.WIM) file and use it to deploy Windows to new devices.
+However, if you're using custom partitions, use this topic to learn more about the individual partititions to capture and apply.
 
-Rather than capturing each partition, you can capture just the Windows partition into an image, and then use the files from that image to set up the rest of the partitions on the drive.
+## Capture the customized partitions
 
-The following diagram illustrates this process:
+### Step 1: Determine which partitions to capture
 
-![diagram showing capturing the windows partition](images/dep-adk-partitions-uefi-overview-capture-windows.jpg)
+This table shows the types of partitions that you must capture and those that are managed automatically.
 
-**Prepare to capture the image**
+If you're deploying both UEFI and BIOS systems, you can reuse your primary and logical partitions across UEFI-based and BIOS-based devices, but not the other partition types.
 
--   Generalize the Windows image, so it can be deployed to other devices. For more information, see [Sysprep (Generalize) a Windows installation](sysprep--generalize--a-windows-installation.md).
+| Partition type | Should you capture this partition? | Can you reuse the same WIM on UEFI and BIOS firmware? |
+| --- | --- | - |
+| **System partition** (EFI System Partition or BIOS system partition) | Optional. If only a simple set of partition files is required, you don’t have to capture this partition. | No | 
+| **Microsoft Reserved partition (MSR)** | No | No |
+| **Primary partitions** (Windows partitions, data / utility partitions that you've added) | Yes | Yes |
+| **Recovery partition** | Optional. If you haven't customized this partition, you don’t have to capture it. | No | 
+| **Extended partition** | No | No |
+| **Logical partitions** (Windows partitions, data / utility partitions that you've added) | Yes | Yes |
 
-**Capture the image**
+### Step 2: Prepare to capture partitions
 
-1.  Boot the device using [Windows PE](winpe-intro.md).
+1.  If you've booted the Windows image, generalize it so that it can be deployed to other devices. For more information, see [Sysprep (Generalize) a Windows installation](sysprep--generalize--a-windows-installation.md).
 
-2.  Optional: speed up the image capture by setting the power scheme to High performance:
+2.  Start your reference device by using Windows PE.
+
+3.  At the Windows PE command prompt, type `diskpart` to open the DiskPart tool.
 
     ```
-    powercfg /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+    X:> diskpart
+    DISKPART>
     ```
 
-3.  Capture the Windows partition. For example:
+4.  Check to see if the partitions that you want to capture have drive letters assigned. 
 
     ```
-    Dism /Capture-Image /ImageFile:"D:\fabrikam.wim" /CaptureDir:C:\ /Name:Fabrikam
+    DISKPART> list volume
+
+      Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
+      ----------  ---  -----------  -----  ----------  -------  ---------  --------
+      Volume 0     C   Windows      NTFS   Partition    475 GB  Healthy    Boot
+      Volume 1                      NTFS   Partition    554 MB  Healthy
+      Volume 2         SYSTEM       FAT32  Partition    499 MB  Healthy    System
     ```
 
-    Where D: is a USB flash drive or other file storage location.
+    If any of the partitions you want to capture don’t already have a drive letter assigned, continue:
 
-## <span id="Applying_the_image"></span><span id="applying_the_image"></span><span id="APPLYING_THE_IMAGE"></span>Applying the image
+5.  List the disks in your PC:
 
+    ```
+    DISKPART> list disk
 
-Here's a few ways to apply the image:
+    Disk ###  Status         Size     Free     Dyn  Gpt
+    --------  -------------  -------  -------  ---  ---
+    Disk 0    Online          127 GB      0 B        *
+    ```
 
-**Apply the image manually**
+6.  Select the primary hard disk:
 
-1.  On the destination device, use a DiskPart script to configure and format your hard drive partitions. For more information, see [Configure UEFI/GPT-Based Hard Drive Partitions](configure-uefigpt-based-hard-drive-partitions.md) or [Configure BIOS/MBR-Based Hard Drive Partitions](configure-biosmbr-based-hard-drive-partitions.md).
+    ```
+    DISKPART> select disk 0
+    ```
 
-    **Note**  
-    If you apply an image to a volume that has an existing Windows installation, files from the previous installation may not be deleted. Format the volume by using a tool such as DiskPart before you apply the new image. For example:
+7.  View the partitions:
+
+    ```
+    DISKPART> list partition
+
+      Partition ###  Type              Size     Offset
+      -------------  ----------------  -------  -------
+      Partition 1    System             499 MB  1024 KB
+      Partition 2    Reserved           128 MB   500 MB
+      Partition 3    Primary            475 GB   628 MB
+      Partition 4    Recovery           554 MB   476 GB
+    ```
+
+8.  Select a partition that needs a drive letter:
+
+    ```
+    DISKPART> select partition=1
+    ```
+
+9.  Assign a letter to the partition with the `assign letter` command. For example,
+
+    ```
+    DISKPART> assign letter=S
+    ```
+
+10. Type `exit` to return to the Windows PE command prompt.
+
+    ```
+    DISKPART> exit
+    X:\>
+    ```
+
+For more information, see the DiskPart Help from the command line, or [Diskpart Command line syntax](http://go.microsoft.com/fwlink/?LinkId=128458).
+
+### Step 3: Capture images for each customized partition.
+
+-   At the Windows PE command prompt, capture each customized partition, for example:
+
+    ```
+    Dism /Capture-Image /ImageFile:C:\my-windows-partition.wim /CaptureDir:C:\ /Name:"My Windows partition"
+    Dism /Capture-Image /ImageFile:C:\my-system-partition.wim /CaptureDir:S:\ /Name:"My system partition"
+    ```
+
+    For more information about using the DISM tool to capture an image, see [DISM Image Management Command-Line Options](dism-image-management-command-line-options-s14.md).
+
+### Step 4: Save images to the network or another safe location.
+
+1.  Connect an external drive, or connect to a safe network location, for example: 
+
+    ```
+    net use n: \\Server\Share
+    ```
+
+    If prompted, provide your network credentials.
+
+2.  Copy the partitions to your network share. For example,
+
+    ```
+    md N:\Images\
+    copy C:\my-windows-partition.wim N:\Images\
+    copy C:\my-system-partition.wim N:\Images\
+    ```
+
+## Apply the images
+
+### Step 1: Prepare to apply partitions
+
+1.  Start your destination device by using Windows PE.
+
+2.  Connect an external drive, or connect to a safe network location, for example: 
+
+    ```
+    net use n: \\Server\Share
+    ```
+
+    If prompted, provide your network credentials.
+
+3.  Wipe the hard drive and create new partitions.
+
+    To apply to multiple devices, we recommend saving the Diskpart commands into a script and running it on each new device.  For examples, see [Configure UEFI/GPT-Based Hard Drive Partitions](configure-uefigpt-based-hard-drive-partitions.md) or [Configure BIOS/MBR-Based Hard Drive Partitions](configure-biosmbr-based-hard-drive-partitions.md). Example:
 
     ``` 
     diskpart /s D:\CreatePartitions-UEFI.txt
@@ -67,106 +169,79 @@ Here's a few ways to apply the image:
 
     If you reboot, Windows PE reassigns disk letters alphabetically, starting with the letter C, without regard to the configuration in Windows Setup. This configuration can change based on the presence of different drives, such as USB flash drives.
 
-2.  Optional: speed up the image capture by setting the power scheme to High performance:
+4.  Optional: speed up the image capture by setting the power scheme to High performance:
 
     ```
     powercfg /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
     ```
 
-3.  Apply the image to the Windows partition:
+### Step 2: Apply the partitions
+
+1.  **Windows and data partitions:** Apply the image(s), example:
 
     ```
-    dism /Apply-Image /ImageFile:D:\install.wim /Index:1 /ApplyDir:W:\
+    dism /Apply-Image /ImageFile:N:\Images\my-windows-partition.wim /Index:1 /ApplyDir:W:\
     ```
 
     where W: is the Windows partition.
 
-4.  Configure the system partition by using the BCDBoot tool. This tool copies and configures system partition files by using files from the Windows partition. For example:
+2.  **System partition:** You can either:
+    
+    * Apply a custom image
 
-    ```
-    W:\Windows\System32\bcdboot W:\Windows /s S:
-    ```
+      ```
+      dism /Apply-Image /ImageFile:N:\Images\my-system-partition.wim /Index:1 /ApplyDir:S:\
+      ```
 
-5.  Copy the Windows Recovery Environment (RE) tools into the recovery tools partition.
+      or
 
-    ```
-    md R:\Recovery\WindowsRE
-    copy W:\Windows\System32\Recovery\winre.wim R:\Recovery\WindowsRE\winre.wim
-    ```
+    * Configure the system partition by using the BCDBoot tool. This tool copies and configures system partition files by using files from the Windows partition. For example:
 
-    Where R: is the recovery partition
+      ```
+      W:\Windows\System32\bcdboot W:\Windows /s S:
+      ```
 
-6.  Register the location of the WindowsRE tools by using REAgentC.
+      Where S: is the system partition
 
-    ```
-    W:\Windows\System32\reagentc /setreimage /path R:\Recovery\WindowsRE /target W:\Windows
-    ```
+2.  **Recovery partition:** 
 
-**Apply the image using a script**
+    a. You can either:
+    
+       * Apply a custom image
 
-1.  Prerequisite: Create DiskPart scripts to deploy your images. For samples, get: [CreatePartitions-UEFI.txt](configure-uefigpt-based-hard-drive-partitions.md) or [CreatePartitions-BIOS.txt](configure-biosmbr-based-hard-drive-partitions.md).
+         ```
+         dism /Apply-Image /ImageFile:N:\Images\my-recovery-partition.wim /Index:1 /ApplyDir:R:\
+         ```
+      
+         or
 
-2.  Copy the following script into Notepad, and then save the file as ApplyImage.bat:
+       * Copy the Windows Recovery Environment (RE) tools into the recovery tools partition.
 
-    ```batch
-    rem == ApplyImage.bat ==
+         ```
+         md R:\Recovery\WindowsRE
+         copy W:\Windows\System32\Recovery\winre.wim R:\Recovery\WindowsRE\winre.wim
+         ```
 
-    rem == These commands deploy a specified Windows
-    rem    image file to the Windows partition, and configure
-    rem    the system partition.
+         Where R: is the recovery partition
 
-    rem    Usage:   ApplyImage WimFileName 
-    rem    Example: ApplyImage E:\Images\ThinImage.wim ==
+    b. Register the location of the recovery tools:
 
-    rem == Set high-performance power scheme to speed deployment ==
-    call powercfg /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+       ```
+       W:\Windows\System32\reagentc /setreimage /path R:\Recovery\WindowsRE /target W:\Windows
+       ```
 
-    rem == Apply the image to the Windows partition ==
-    dism /Apply-Image /ImageFile:%1 /Index:1 /ApplyDir:W:\
+### Step 3: Verify that it worked
 
-    rem == Copy boot files to the System partition ==
-    W:\Windows\System32\bcdboot W:\Windows /s S:
+Reboot the device (`exit`).
 
-    :rem == Copy the Windows RE image to the
-    :rem    Windows RE Tools partition ==
-    md R:\Recovery\WindowsRE
-    xcopy /h W:\Windows\System32\Recovery\Winre.wim R:\Recovery\WindowsRE\
+After completing the out of box experience (OOBE), view the partitions either by right-clicking **Start** and selecting **Disk Management**, or by using diskpart (Open a command prompt as an administrator > `diskpart` > `select disk 0` > `list partition` > `exit`).
 
-    :rem == Register the location of the recovery tools ==
-    W:\Windows\System32\Reagentc /Setreimage /Path R:\Recovery\WindowsRE /Target W:\Windows
-
-    :rem == Verify the configuration status of the images. ==
-    W:\Windows\System32\Reagentc /Info /Target W:\Windows
-    ```
-
-3.  On the destination computer, run the Diskpart and ApplyImage scripts to apply the image to the computer and set up the system, Windows, and recovery partitions. For example:
-
-    ```
-    diskpart /s D:\CreatePartitions-UEFI.txt
-    ApplyImage E:\Images\ThinImage.wim
-    ```
-
-    where D:\\Images\\ThinImage.wim is the name of your Windows image file.
-
-    **Note**  If the DISM /Apply-Image command fails, make sure you’re using a [supported version of DISM](dism-supported-platforms.md) for that Windows image. For example, to apply a Windows 10 image, you’ll need the Windows 10 version of DISM.
-
-     
-
-**Capture and apply individual partitions (BIOS devices only)**
-
-1.  On your reference device, capture each of the partitions individually using DISM /Capture-Image and then apply them to your destination devices using DISM /Apply-Image.
-
-    This method allows you flexibility in setting up your system partition. Note, for UEFI-based devices, do not capture and apply the EFI system partition or the MSR partition – these are managed by the device.
-
-2.  Use the BCDBoot command to set up the system partition.
-
-    ```
-    bcdboot C:\Windows
-    ```
-
-**Capture and apply the entire drive**
-
--   You can use the Full Flash Update (FFU) file format to capture and apply the entire drive. To learn more, see [Deploy Windows using Full Flash Update (FFU)](deploy-windows-using-full-flash-update--ffu.md).
+> [!Note]
+> If you receive the error message: **Bootmgr not found. Press CTRL+ALT+DEL**, this indicates that Windows cannot identify the boot information in the active partition. If you receive this error message, check the following:
+> 
+> -   Use the DiskPart tool to check to make sure that the system partition is set to Active.
+> 
+> -   Check to make sure that the active partition includes system files.
 
 ## <span id="related_topics"></span>Related topics
 
@@ -178,13 +253,3 @@ Here's a few ways to apply the image:
 [BCDboot Command-Line Options](bcdboot-command-line-options-techref-di.md)
 
 [REAgentC Command-Line Options](reagentc-command-line-options.md)
-
- 
-
- 
-
-
-
-
-
-
