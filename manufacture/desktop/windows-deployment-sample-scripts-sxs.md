@@ -453,7 +453,7 @@ xcopy /h %recoveryfolder%Winre.wim R:\Recovery\WindowsRE\
 
 ApplyRecovery.bat relies on the following  DiskPart scripts, which must be placed in the same folder:
 
-#### CreateRecoveryPartitions-UEFI.txt
+#### <span id="create-recovery-partitions"></span>CreateRecoveryPartitions-UEFI.txt
 
 ```
 rem == CreateRecoveryPartitions-UEFI.txt ==

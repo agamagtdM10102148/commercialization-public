@@ -187,18 +187,18 @@ For more information, see the DiskPart Help from the command line, or [Diskpart 
 
 2.  **System partition:** You can either:
     
-    * Apply a custom image
-
-      ```
-      dism /Apply-Image /ImageFile:N:\Images\my-system-partition.wim /Index:1 /ApplyDir:S:\
-      ```
-
-      or
-
     * Configure the system partition by using the BCDBoot tool. This tool copies and configures system partition files by using files from the Windows partition. For example:
 
       ```
       W:\Windows\System32\bcdboot W:\Windows /s S:
+      ```
+
+      or
+
+    * Apply a custom image
+
+      ```
+      dism /Apply-Image /ImageFile:N:\Images\my-system-partition.wim /Index:1 /ApplyDir:S:\
       ```
 
       Where S: is the system partition
@@ -207,14 +207,6 @@ For more information, see the DiskPart Help from the command line, or [Diskpart 
 
     a. You can either:
     
-       * Apply a custom image
-
-         ```
-         dism /Apply-Image /ImageFile:N:\Images\my-recovery-partition.wim /Index:1 /ApplyDir:R:\
-         ```
-      
-         or
-
        * Copy the Windows Recovery Environment (RE) tools into the recovery tools partition.
 
          ```
@@ -224,17 +216,42 @@ For more information, see the DiskPart Help from the command line, or [Diskpart 
 
          Where R: is the recovery partition
 
-    b. Register the location of the recovery tools:
+       * Apply a custom image
+
+         ```
+         dism /Apply-Image /ImageFile:N:\Images\my-recovery-partition.wim /Index:1 /ApplyDir:R:\
+         ```
+
+    b. Register the location of the recovery tools, and hide the recovery partition using Diskpart. You can use our [sample script](windows-deployment-sample-scripts.md#create-recovery-partitions) or perform the steps manually:
 
        ```
        W:\Windows\System32\reagentc /setreimage /path R:\Recovery\WindowsRE /target W:\Windows
        ```
 
+       Diskpart steps for UEFI: 
+       
+       ```
+       set id="de94bba4-06d1-4d40-a16a-bfd50179d6ac"
+       gpt attributes=0x8000000000000001
+       ```
+
+       Diskpart steps for BIOS:
+       ```
+       set id=27
+       ```
+
+
 ### Step 3: Verify that it worked
 
 Reboot the device (`exit`).
 
-After completing the out of box experience (OOBE), view the partitions either by right-clicking **Start** and selecting **Disk Management**, or by using diskpart (Open a command prompt as an administrator > `diskpart` > `select disk 0` > `list partition` > `exit`).
+After completing the out of box experience (OOBE):
+
+* View the partitions exist, either by right-clicking **Start** and selecting **Disk Management**, or by using diskpart (Open a command prompt as an administrator > `diskpart` > `select disk 0` > `list partition` > `exit`).
+
+* Check that in File Explorer that the Recovery partition is not visible.
+
+
 
 > [!Note]
 > If you receive the error message: **Bootmgr not found. Press CTRL+ALT+DEL**, this indicates that Windows cannot identify the boot information in the active partition. If you receive this error message, check the following:
@@ -244,7 +261,6 @@ After completing the out of box experience (OOBE), view the partitions either by
 > -   Check to make sure that the active partition includes system files.
 
 ## <span id="related_topics"></span>Related topics
-
 
 [Configure UEFI/GPT-Based Hard Drive Partitions](configure-uefigpt-based-hard-drive-partitions.md)
 
