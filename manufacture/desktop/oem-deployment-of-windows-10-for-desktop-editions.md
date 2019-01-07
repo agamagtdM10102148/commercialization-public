@@ -1,8 +1,8 @@
 ---
 title: OEM deployment of Windows 10 for desktop editions
-author: kpacquer
+
 description: Get step-by-step guidance for OEMs to deploy Windows 10 to desktop computers, laptops, and 2-in-1s. Find information about how to enable imageless, push-button reset recovery and more.  
-ms.author: kenpacq
+
 ms.date: 10/17/2017
 ms.topic: article
 ms.custom: RS5
@@ -693,7 +693,7 @@ Note: While it’s possible to add FODs using the /add-package command, we recom
 3. Add the .NET framework.
 
     ```
-    dism /image:C:\mount\windows /add-capability /capabilityname:NetFX3~~~ /Source:E:
+    dism /image:C:\mount\windows /add-capability /capabilityname:NetFX3~~~~ /Source:E:
     ```
     Where E: is the mounted FOD ISO.
 

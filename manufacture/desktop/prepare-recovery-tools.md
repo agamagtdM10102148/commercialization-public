@@ -1,9 +1,8 @@
 ---
-author: kpacquer
+
 Description: Prepare recovery tools for your Windows images
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Prepare recovery tools for your Windows images
-ms.author: kenpacq
 ms.date: 12/18/2018
 ms.topic: article
 ms.custom: RS5

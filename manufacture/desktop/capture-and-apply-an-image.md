@@ -1,9 +1,8 @@
 ---
-author: kpacquer
+
 Description: Capture and apply a Windows image
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Capture and apply an image
-ms.author: kenpacq
 ms.date: 01/7/2019
 ms.topic: article
 ms.custom: RS5

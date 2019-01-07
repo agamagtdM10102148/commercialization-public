@@ -1,11 +1,10 @@
 ---
-author: kpacquer
+
 Description: 'Deploy Windows faster on the factory floor by using the Full Flash Update (FFU) image format.'
 ms.assetid: af2b402f-9a5c-4c6a-8852-61039e5bec2a
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: 'Capture and apply Windows Full Flash Update (FFU) images'
-ms.author: kenpacq
-ms.date: 10/17/2017
+ms.date: 1/7/2019
 ms.topic: article
 
 

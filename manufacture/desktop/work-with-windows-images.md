@@ -1,9 +1,8 @@
 ---
-author: kpacquer
+
 Description: Learn how to to work with Windows images
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Work with Windows images
-ms.author: kenpacq
 ms.date: 1/4/2019
 ms.topic: article
 ms.custom: RS5

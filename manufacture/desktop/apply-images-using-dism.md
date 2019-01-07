@@ -1,11 +1,10 @@
 ---
-author: kpacquer
 Description: Apply WIM Images Using DISM
 ms.assetid: f9e0727d-a210-4efa-85af-5b222c53624e
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Apply Images Using DISM
-ms.author: kenpacq
-ms.date: 12/20/2018
+
+ms.date: 12/14/2018
 ms.topic: article
 
 redirect_url: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/capture-and-apply-using-a-single-wim.md

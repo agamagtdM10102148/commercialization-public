@@ -1,10 +1,8 @@
 ---
-author: kpacquer
 Description: Modify a Windows image using DISM
 ms.assetid: f48b4681-bc59-4eb1-89c9-0163594467f7
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Modify a Windows Image Using DISM
-ms.author: kenpacq
 ms.date: 01/07/2019
 ms.topic: article
 
