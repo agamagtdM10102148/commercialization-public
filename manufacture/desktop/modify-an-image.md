@@ -3,8 +3,7 @@
 Description: Modify a Windows image
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Modify a Windows image
-
-ms.date: 05/16/2018
+ms.date: 1/7/2019
 ms.topic: article
 ms.custom: RS5
 ---
@@ -29,6 +28,6 @@ You can service, or make changes to, a Windows image in different ways:
 
 | Topic | Description |
 |  --- | ---  |
-| [Service a Windows image using DISM](service-a-windows-image-using-dism.md) | How to make changes to a Windows image |
+| [Audit mode](audit-mode-overview.md) | Update Windows from a familiar Windows environment. |
 | [Mount and Modify a Windows Image Using DISM](mount-and-modify-a-windows-image-using-dism.md) | How to use DISM to mount a Windows image and make changes |
 | [Repair a Windows Image](repair-a-windows-image.md) | How to repair a corrupted Windows image |

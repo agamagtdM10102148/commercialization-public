@@ -8,9 +8,9 @@ title: Service a Windows Image Using DISM
 ms.date: 05/02/2017
 ms.topic: article
 
-
+redirect_url: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/modify-an-image
 ---
-
+<!--
 # Service a Windows Image Using DISM
 
 
@@ -92,5 +92,5 @@ You can also use DISM to service an image online. If you have to boot the operat
 
 
 
-
+-->
 

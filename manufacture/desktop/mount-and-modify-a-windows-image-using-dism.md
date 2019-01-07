@@ -5,7 +5,6 @@ MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Modify a Windows Image Using DISM
 ms.date: 01/07/2019
 ms.topic: article
-
 ---
  
 # Modify a Windows image using DISM
@@ -112,6 +111,8 @@ If you modified an applied image, you don't have to do anything else. You'll see
 
 ## Troubleshooting
 
+See [Repair a Windows Image](repair-a-windows-image.md).
+
 **If the DISM commands in this topic fail, try the following:**
 
 1.  Make sure that you are using the Windows 10 version of DISM that is installed with the Windows ADK.
@@ -128,13 +129,4 @@ If you modified an applied image, you don't have to do anything else. You'll see
 [DISM Image Management Command-Line Options](dism-image-management-command-line-options-s14.md)
 
 [Service a Windows Image Using DISM](service-a-windows-image-using-dism.md)
-
- 
-
- 
-
-
-
-
-
 
