@@ -26,7 +26,6 @@
 ##### [Lab 5: Configure Shell Launcher or Assigned Access](desktop/iot-ent-shell-launcher-app-launcher.md)
 ### [Work with Windows images](desktop/work-with-windows-images.md)
 #### [WIM vs. VHD  vs. FFU: comparing image file formats](desktop/wim-vs-ffu-image-file-formats.md)
-#### [Understanding servicing strategies](desktop/understanding-servicing-strategies.md)
 #### [Capture and apply a Full Flash Update (FFU) image](desktop/deploy-windows-using-full-flash-update--ffu.md)
 #### [Capture and apply a WIM image](desktop/capture-and-apply-an-image.md)
 ##### [Capture and apply Windows using a single WIM file](desktop/capture-and-apply-windows-using-a-single-wim.md)
