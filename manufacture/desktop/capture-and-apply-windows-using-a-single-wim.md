@@ -5,14 +5,12 @@ ms.assetid: db1f011f-2cf3-46b7-a386-8333f6214b9e
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: 'Capture and Apply Windows using a WIM file'
 ms.author: kenpacq
-ms.date: 05/02/2017
+ms.date: 1/07/2019
 ms.topic: article
-
 
 ---
 
 # Capture and apply a Windows image using a single .WIM file
-
 
 Capture a Windows image (.WIM) file and use it to deploy Windows to new devices.
 
@@ -21,8 +19,6 @@ You can start with either the install.wim file from a Windows distribution ISO, 
 WIM files only capture a single partition. You can usually capture just the Windows partition, and then use files from that image to set up the rest of the partitions on the drive. If you've created a custom partition configuration, see [Capture and Apply Windows, System, and Recovery Partitions](capture-and-apply-windows-system-and-recovery-partitions.md).
 
 ![Diagram showing a new computer with an empty hard drive, plus a single .wim image file, expands to become multiple configured partitions](images/dep-adk-partitions-uefi-overview-capture-windows.jpg)
-
-Note, you can also use the Full Flash Update (FFU) file format to capture and apply the entire drive. To learn more, see [Deploy Windows using Full Flash Update (FFU)](deploy-windows-using-full-flash-update--ffu.md).
 
 ## Capture the image**
 
@@ -89,25 +85,11 @@ Note, you can also use the Full Flash Update (FFU) file format to capture and ap
     W:\Windows\System32\Reagentc /Info /Target W:\Windows
     ```
 
+## Related topics
 
-## Capture and apply individual partitions (BIOS devices only)**
+[Deploy Windows using Full Flash Update (FFU)](deploy-windows-using-full-flash-update--ffu.md)
 
-1.  On your reference device, capture each of the partitions individually using DISM /Capture-Image and then apply them to your destination devices using DISM /Apply-Image.
-
-    This method allows you flexibility in setting up your system partition. Note, for UEFI-based devices, do not capture and apply the EFI system partition or the MSR partition – these are managed by the device.
-
-2.  Use the BCDBoot command to set up the system partition.
-
-    ```
-    bcdboot C:\Windows
-    ```
-
-**Capture and apply the entire drive**
-
-
-
-## <span id="related_topics"></span>Related topics
-
+[Capture and Apply Windows, System, and Recovery Partitions](capture-and-apply-windows-system-and-recovery-partitions.md)
 
 [Configure UEFI/GPT-Based Hard Drive Partitions](configure-uefigpt-based-hard-drive-partitions.md)
 
@@ -116,13 +98,3 @@ Note, you can also use the Full Flash Update (FFU) file format to capture and ap
 [BCDboot Command-Line Options](bcdboot-command-line-options-techref-di.md)
 
 [REAgentC Command-Line Options](reagentc-command-line-options.md)
-
- 
-
- 
-
-
-
-
-
-

@@ -193,7 +193,7 @@ For more information, see the DiskPart Help from the command line, or [Diskpart 
       W:\Windows\System32\bcdboot W:\Windows /s S:
       ```
 
-      or
+      or:
 
     * Apply a custom image
 
@@ -215,6 +215,8 @@ For more information, see the DiskPart Help from the command line, or [Diskpart 
          ```
 
          Where R: is the recovery partition
+
+     or:
 
        * Apply a custom image
 
@@ -240,25 +242,20 @@ For more information, see the DiskPart Help from the command line, or [Diskpart 
        set id=27
        ```
 
-
 ### Step 3: Verify that it worked
 
-Reboot the device (`exit`).
+Reboot the device (`exit`). Windows should boot.
 
-After completing the out of box experience (OOBE):
+> [!Note]
+> If the device doesn't boot, (for example, if you receive the error message: **Bootmgr not found. Press CTRL+ALT+DEL**) check the steps for setting up the system partition:
+> - See [BCDBoot command-line options](bcdboot-command-line-options-techref-di.md) for more info about copying boot files to the system partition.
+> - Use the DiskPart tool to check to make sure that the system partition is set to Active.
 
-* View the partitions exist, either by right-clicking **Start** and selecting **Disk Management**, or by using diskpart (Open a command prompt as an administrator > `diskpart` > `select disk 0` > `list partition` > `exit`).
+Complete the out of box experience (OOBE) as a new user, and check the recovery partition:
 
 * Check that in File Explorer that the Recovery partition is not visible.
 
-
-
-> [!Note]
-> If you receive the error message: **Bootmgr not found. Press CTRL+ALT+DEL**, this indicates that Windows cannot identify the boot information in the active partition. If you receive this error message, check the following:
-> 
-> -   Use the DiskPart tool to check to make sure that the system partition is set to Active.
-> 
-> -   Check to make sure that the active partition includes system files.
+* View the partitions exist, either by right-clicking **Start** and selecting **Disk Management**, or by using diskpart (Open a command prompt as an administrator > `diskpart` > `select disk 0` > `list partition` > `exit`).
 
 ## <span id="related_topics"></span>Related topics
 
