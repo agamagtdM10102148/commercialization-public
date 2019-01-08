@@ -1,21 +1,24 @@
 ---
 
-Description: 'Capture and Apply Windows, System, and Recovery Partitions'
+Description: 'Capture and apply Windows, system, and recovery partitions'
 ms.assetid: db1f011f-2cf3-46b7-a386-8333f6214b9e
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: 'Capture and Apply Windows, System, and Recovery Partitions'
 
-ms.date: 05/02/2017
+ms.date: 01/08/2019
 ms.topic: article
 
 
 ---
 
-# Capture and Apply Windows, System, and Recovery Partitions
+# Capture and apply Windows, system, and recovery partitions
 
-When capturing a Windows image using .WIM files, you usually can just capture the Windows partition, and then use files from that image to set up the rest of the partitions on the drive. See [Capture and Apply Windows using a single WIM file](capture-and-apply-windows-using-a-single-wim.md).
+When you're deploying Windows using the WIM format, and using customized partitions, a customized system partition or an additional utility partition, learn how to capture the right partitions to apply to new PCs.  
 
-However, if you're using custom partitions, use this topic to learn more about the individual partititions to capture and apply.
+Notes: 
+* If you don't need custom partitions, you usually can just capture the Windows partition, and then use files from that image to set up the rest of the partitions on the drive. See [Capture and Apply Windows using a single WIM file](capture-and-apply-windows-using-a-single-wim.md).
+
+* If you're capturing using the FFU format, you'll be fine - FFU captures all of the partitions on the drive.
 
 ## Capture the customized partitions
 
@@ -224,7 +227,7 @@ For more information, see the DiskPart Help from the command line, or [Diskpart 
          dism /Apply-Image /ImageFile:N:\Images\my-recovery-partition.wim /Index:1 /ApplyDir:R:\
          ```
 
-    b. Register the location of the recovery tools, and hide the recovery partition using Diskpart. You can use our [sample script](windows-deployment-sample-scripts.md#create-recovery-partitions) or perform the steps manually:
+    b. Register the location of the recovery tools, and hide the recovery partition using Diskpart. You can use our [sample script](windows-deployment-sample-scripts-sxs.md#create-recovery-partitions) or perform the steps manually:
 
        ```
        W:\Windows\System32\reagentc /setreimage /path R:\Recovery\WindowsRE /target W:\Windows

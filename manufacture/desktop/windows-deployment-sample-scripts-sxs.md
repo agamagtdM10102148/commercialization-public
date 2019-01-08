@@ -586,9 +586,44 @@ Sample **LayoutModification.xml**:
 ```
 
 
+## TaskbarLayoutModification.xml
+
+You can pin apps to the taskbar. To learn more, see [OEM Taskbar tiles](https://docs.microsoft.com/windows-hardware/customize/desktop/customize-the-taskbar).
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutModificationTemplate
+xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"
+xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout"
+xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout"
+xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout"
+Version="1">
+
+<CustomTaskbarLayoutCollection PinListPlacement="Replace">
+    <defaultlayout:TaskbarLayout>
+        <taskbar:TaskbarPinList>
+            <taskbar:UWA AppUserModelID="Microsoft.Windows.Photos_8wekyb3d8bbwe!App" />
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Accessories\Paint.lnk"/>
+        </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+    <defaultlayout:TaskbarLayout Region="US|GB">
+        <taskbar:TaskbarPinList >
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Accessories\Notepad.lnk" />
+            <taskbar:UWA AppUserModelID="Microsoft.WindowsCalculator_8wekyb3d8bbwe!App" />
+        </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+    <defaultlayout:TaskbarLayout Region="CN|TW">
+        <taskbar:TaskbarPinList>
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Accessories\Notepad.lnk" />
+            <taskbar:UWA AppUserModelID="Microsoft.Windows.Photos_8wekyb3d8bbwe!App" />
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Accessories\Paint.lnk"/>
+        </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+</CustomTaskbarLayoutCollection>
+</LayoutModificationTemplate>
+```
 
 ## <span id="BootToAudit"></span><span id="boottoaudit"></span><span id="BOOTTOAUDIT"></span>BootToAudit
-
 
 Add an answer file to the Windows image in C:\\mount\\windows\\Windows\\Panther\\unattend.xml to instruct it to boot into audit mode. You can create this answer file in Windows System Image Manager.
 

@@ -15,7 +15,7 @@ You can update Windows Preinstallation Environment (WinPE) by adding drivers, la
 
 You must use these commands on a mounted WinPE image. See [WinPE: Mount and Customize](winpe-mount-and-customize.md). These options cannot be used with an online, running version of Windows PE. 
 
-In addition to the [DISM global options](dism-global-toptions-for-command-line-syntax.md), the following Windows PE servicing options are available. These options are not case sensitive.
+In addition to the [DISM global options](dism-global-options-for-command-line-syntax.md), the following Windows PE servicing options are available. These options are not case sensitive.
 
 **DISM.exe /Image:** *&lt;path\_to\_image\_directory&gt;* \[**/Get-PESettings** | **/Get-ScratchSpace** | **/Get-TargetPath** | **/Set-ScratchSpace:***&lt;size\_of\_ScratchSpace&gt;* | **/Set-TargetPath :***&lt;target\_path&gt;* \]
 

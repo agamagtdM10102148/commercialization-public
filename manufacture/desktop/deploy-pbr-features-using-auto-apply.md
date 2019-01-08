@@ -133,12 +133,17 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     MkDir C:\Recovery\AutoApply
     ```
 
-2. Copy configuration files and the related asset files
+2. Copy configuration files and any related asset files into the Autoapply folders: 
 
-    - Copy your LayoutModification.xml to `C:\Recovery\AutoApply\` to `C:\Recovery\AutoApply\CustomizationFiles`
-    - Copy your TaskbarLayoutModification.xml to `C:\Recovery\AutoApply\` to `C:\Recovery\AutoApply\CustomizationFiles`
-    - Copy `%windir%\System32\OOBE\info` and all its contents to `C:\Recovery\AutoApply\OOBE`
-    - Copy the unattend.xml file you want for recovery to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`. Note, during a restore, the asset files will be restored to `C:\Windows\OEM\CustomizationFiles`.
+   | Description | Files to be copied| Where to put it | During a restore, where does it go? |
+   |------------|------------------|------------------------|-------------|
+   |Start menu  | LayoutModification.xml| `C:\Recovery\AutoApply\` | `%SYSTEMDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\Shell`
+   | Taskbar pins| TaskbarLayoutModification.xml |`C:\Recovery\AutoApply\` | `C:\Windows\OEM\TaskbarLayoutModification.xml` |
+   | OOBE.xml | `%windir%\System32\OOBE\info` | `C:\Recovery\AutoApply\OOBE` | `%windir%\System32\OOBE\info` |
+   | Unattend file | unattend.xml | `C:\Recovery\AutoApply\` | `C:\Windows\Panther\Unattend.xml`|
+   | Other asset files   |   | `C:\Recovery\AutoApply\CustomizationFiles` |  `C:\Windows\OEM\CustomizationFiles` |
+
+   Note, don't worry about restoring link (.lnk) files used by the Start menu and Taskbar. These are saved and restored using [provisioning packages](#scanstate).
 
 ## Step 5: Deploy and customize Windows
 
@@ -225,7 +230,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     DISM.exe /Cleanup-Image /StartComponentCleanup
     ```
 
-## Step 6: Capture and deploy customizations for recovery
+## <span id="scanstate"></span>Step 6: Capture and deploy customizations for recovery
 
 1.  Use the ScanState tool to capture the installed customizations into a provisioning package. Use the /config option to specify one of the default configuration files included with the ADK, and save the .ppkg file in the folder C:\\Recovery\\Customizations.
 
@@ -288,7 +293,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
 
 1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features from the following entry points:
 
-    **Settings :** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
+    **Settings:** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
 
     **Windows RE**: From the Choose an option screen in Windows RE, click **Troubleshoot &gt; Reset this PC** and then follow the on-screen instructions
 

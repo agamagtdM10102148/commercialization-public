@@ -39,7 +39,9 @@ The XML schema for `LayoutModification.xml` requires the following order for tag
 
 Comments are not supported in the `LayoutModification.xml` file.
 
-For an inclusive list of settings you can configure in `LayoutModification.xml`, a full XML example, and instructions on adding the XML file to the device, see [Start layout XML for desktop editions of Windows 10 (Reference)](https://docs.microsoft.com/en-us/windows/configuration/start-layout-xml-desktop)
+For an inclusive list of settings you can configure in `LayoutModification.xml`, a full XML example, and instructions on adding the XML file to the device, see [Start layout XML for desktop editions of Windows 10 (Reference)](https://docs.microsoft.com/en-us/windows/configuration/start-layout-xml-desktop).
+
+We also recommend placing a backup copy of the file at `C:\Recovery\AutoApply\LayoutModification.xml` so it will be restored during a [push-button reset](https://docs.microsoft.com/windows-hardware/manufacture/desktop/deploy-pbr-features-using-auto-apply).
 
 ## Customize the size of the Start layout
 
