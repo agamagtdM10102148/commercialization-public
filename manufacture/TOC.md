@@ -45,18 +45,6 @@
 ##### [Run custom actions during a feature update](desktop/windows-setup-enable-custom-actions.md)
 ##### [Add a custom script to Windows Setup](desktop/add-a-custom-script-to-windows-setup.md)
 
-### [Capture and apply an image](desktop/work-with-windows-images.md)
-#### [WIM vs. VHD  vs. FFU: comparing image file formats](desktop/wim-vs-ffu-image-file-formats.md)
-#### [Capture and apply a Full Flash Update (FFU) image](desktop/deploy-windows-using-full-flash-update--ffu.md)
-#### [Capture and apply a WIM image](desktop/capture-and-apply-an-image.md)
-##### [Capture and apply Windows using a single WIM file](desktop/capture-and-apply-windows-using-a-single-wim.md)
-##### [Capture and apply Windows, system, and recovery partitions](desktop/capture-and-apply-windows-system-and-recovery-partitions.md)
-##### [Create a WIM for multiple architecture types](desktop/create-a-wim-for-multiple-architecture-types-using-dism.md)
-##### [Split a Windows image file (.wim) to span across multiple DVDs](desktop/split-a-windows-image--wim--file-to-span-across-multiple-dvds.md)
-##### [Append a volume image to an existing image](desktop/append-a-volume-image-to-an-existing-image-using-dism--s14.md)
-##### [Create a WIM data image](desktop/create-a-data-image-using-dism.md)
-#### [Boot to VHD (Native Boot): Add a Virtual Hard Disk to the Boot Menu](desktop/boot-to-vhd--native-boot--add-a-virtual-hard-disk-to-the-boot-menu.md)
-
 ### [Modify an image](desktop/modify-an-image.md)
 #### [Audit Mode](desktop/audit-mode-overview.md)
 ##### [Run Audit Mode in the factory](desktop/run-audit-mode-in-the-factory.md)
@@ -72,6 +60,18 @@
 #### [Mount and modify a Windows image Using DISM](desktop/mount-and-modify-a-windows-image-using-dism.md)
 ##### [Repair a Windows image](desktop/repair-a-windows-image.md)
 ##### [Configure a Windows repair source](desktop/configure-a-windows-repair-source.md)
+
+### [Capture and apply an image](desktop/work-with-windows-images.md)
+#### [WIM vs. VHD  vs. FFU: comparing image file formats](desktop/wim-vs-ffu-image-file-formats.md)
+#### [Capture and apply a Full Flash Update (FFU) image](desktop/deploy-windows-using-full-flash-update--ffu.md)
+#### [Capture and apply a WIM image](desktop/capture-and-apply-an-image.md)
+##### [Capture and apply Windows using a single WIM file](desktop/capture-and-apply-windows-using-a-single-wim.md)
+##### [Capture and apply Windows, system, and recovery partitions](desktop/capture-and-apply-windows-system-and-recovery-partitions.md)
+##### [Create a WIM for multiple architecture types](desktop/create-a-wim-for-multiple-architecture-types-using-dism.md)
+##### [Split a Windows image file (.wim) to span across multiple DVDs](desktop/split-a-windows-image--wim--file-to-span-across-multiple-dvds.md)
+##### [Append a volume image to an existing image](desktop/append-a-volume-image-to-an-existing-image-using-dism--s14.md)
+##### [Create a WIM data image](desktop/create-a-data-image-using-dism.md)
+#### [Boot to VHD (Native Boot): Add a Virtual Hard Disk to the Boot Menu](desktop/boot-to-vhd--native-boot--add-a-virtual-hard-disk-to-the-boot-menu.md)
 
 ### [Customize](desktop/customize-windows.md)
 

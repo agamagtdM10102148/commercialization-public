@@ -1,6 +1,6 @@
 ---
 
-Description: Learn how to to work with Windows images
+Description: Capture, apply, and work with Windows images
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Work with Windows images
 ms.date: 1/4/2019
@@ -8,23 +8,11 @@ ms.topic: article
 ms.custom: RS5
 ---
 
-# Work with Windows images
+# Capture, apply, and work with Windows images
 
 The Windows 10 OPK includes an image file, **install.wim**, which contains the operating system files for your Windows edition.
 
 Starting by deploying this image to a device, add your customizations to it, test, and incorporate those changes into your images, iterating until you're ready to put the image onto the factory floor.
-
-## Servicing strategies
-
-You can make changes to a Windows image in different ways:
-
-* [Online servicing](audit-mode-overview.md): Update Windows from a familiar Windows environment.
-
-* [Offline servicing](mount-and-modify-a-windows-image-using-dism.md): Update Windows faster by using DISM to make your changes without ever booting Windows.
-
-* [Servicing an image by using Windows Setup](windows-setup-automation-overview.md): Use Windows Setup, plus a customized answer file (unattend.xml), to make final modifications.
-
-To learn more about these methods, see [Modify an image](modify-an-image.md).
 
 ## File formats: WIM, FFU, VHD
 
