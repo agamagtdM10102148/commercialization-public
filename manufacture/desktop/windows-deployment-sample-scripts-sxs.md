@@ -1,10 +1,10 @@
 ---
-author: kpacquer
+
 Description: 'The following scripts are used in the lab. It may be helpful to create these all at once, or to download the samples from the web.'
 ms.assetid: 621503da-e74f-4eef-8315-72c8be67747a
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Sample scripts
-ms.author: kenpacq
+
 ms.date: 05/02/2017
 ms.topic: article
 ms.custom: RS5
@@ -453,7 +453,7 @@ xcopy /h %recoveryfolder%Winre.wim R:\Recovery\WindowsRE\
 
 ApplyRecovery.bat relies on the following  DiskPart scripts, which must be placed in the same folder:
 
-#### CreateRecoveryPartitions-UEFI.txt
+#### <span id="create-recovery-partitions"></span>CreateRecoveryPartitions-UEFI.txt
 
 ```
 rem == CreateRecoveryPartitions-UEFI.txt ==
@@ -651,7 +651,7 @@ rem Recommended: Create a pagefile for devices with 1GB or less of RAM.
 wpeutil CreatePageFile /path=%TARGETOSDRIVE%\PageFile.sys /size=256
 ```
 
-To learn more about using extensibility points for push-button reset, see [Add a script to push-button reset features](http://go.microsoft.com/fwlink/?LinkId=618946).
+To learn more about using extensibility points for push-button reset, see [Add extensibility scripts to push-button reset](http://go.microsoft.com/fwlink/?LinkId=618946).
 
 ## <span id="Reinstall_Windows_inbox_apps"></span>Reinstall Windows inbox apps
 

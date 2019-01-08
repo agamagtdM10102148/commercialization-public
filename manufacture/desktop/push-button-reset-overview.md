@@ -1,10 +1,10 @@
 ---
-author: kpacquer
+
 Description: 'Push-button reset'
 ms.assetid: f3d01e46-2288-42b3-a662-1f9346aeb50f
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: 'Push-button reset'
-ms.author: kenpacq
+
 ms.date: 05/02/2017
 ms.topic: article
 ms.custom: RS5
@@ -38,7 +38,7 @@ Previous versions of Windows 10 provided the following improvements to push-butt
     You can modify these configuration files by setting the migrate attribute for specific components to *no*, but components that are already excluded from capture/migration in the default configuration files must remain excluded.
 - **Improved reliability:** When you start push-button reset features from the Settings app, Windows scans the system files in the Windows Component Store for corruptions. If it finds corrupt files and can download replacements through Windows Update, it fixes the problem automatically. Although this increases the overall recovery time, it improves the reliability of the PC.
 - **Recover from failed resets:** In Windows 10, Version 1507, and Windows 10, Version 1511, failures that occur during Reset this PC almost always rendered the PC unbootable/unrecoverable. This feature has been redesigned in the Anniversary Update to support limited rollback if a problem occurs while the PC is in Windows RE.
-- **Recovery options when booted from recovery media:** When the PC is booted from recovery media, the Refresh this PC and Reset this PC features are no longer supported. The only Push-button reset feature available when booted from media is bare metal recovery (i.e. Recover from a drive).
+- **Recovery options when booted from recovery media:** When the PC is booted from recovery media, the **Keep my files** and **Remove everything** features are no longer supported. The only Push-button reset feature available when booted from media is bare metal recovery (i.e. Recover from a drive).
 - **Image-less recovery**: Push-button reset no longer require or support a separate recovery image on a local partition or on media. This significantly reduces the disk space needed to support the features, and makes recovery possible even on devices with limited storage capacity.
 - **Recovers to an updated state**: Push-button reset features now recover the Operating System (OS) and drivers (including device applets that are installed as part of INF-based driver packages) to an updated state. This reduces the amount of time users have to spend reinstalling the OS updates and drivers after performing a recovery.
 
@@ -46,8 +46,8 @@ The Push-button reset user experience continues to offer customization opportuni
 
 The following Push-button reset features are available to users with Windows 10 PCs and devices:
 
--   **Refresh your PC** Fixes software problems by reinstalling the OS while preserving the user data, user accounts, and important settings. All other preinstalled customizations are restored to their factory state. In Windows 10, this feature no longer preserves user-acquired Windows apps.
--   **Reset your PC** Prepares the PC for recycling or for transfer of ownership by reinstalling the OS, removing all user accounts and contents (e.g. data, Windows desktop applications, and Universal Windows apps), and restoring preinstalled customizations to their factory state.
+-   **Keep my files** Fixes software problems by reinstalling the OS while preserving the user data, user accounts, and important settings. All other preinstalled customizations are restored to their factory state. In Windows 10, this feature no longer preserves user-acquired Windows apps.
+-   **Remove everything** Prepares the PC for recycling or for transfer of ownership by reinstalling the OS, removing all user accounts and contents (e.g. data, Windows desktop applications, and Universal Windows apps), and restoring preinstalled customizations to their factory state.
 -   **Bare metal recovery** Restores the default or preconfigured partition layout on the system disk, and reinstalls the OS and preinstalled customizations from external media.
 
 ![Screenshot shows options: Keep my files, or Remove Everything](images/dep-winre-pbr.png)
@@ -74,7 +74,11 @@ The following Push-button reset features are available to users with Windows 10
 </tr>
 <tr class="odd">
 <td align="left"><p><strong>Operations</strong></p></td>
-<td align="left"><p><a href="deploy-push-button-reset-features.md" data-raw-source="[Deploy push-button reset features using ScanState](deploy-push-button-reset-features.md)">Deploy push-button reset features using ScanState</a> | <a href="deploy-pbr-features-using-auto-apply.md">Deploy push-button reset features using Auto-Apply folders</a> | <a href="bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md" data-raw-source="[Bare metal reset/recovery: enable your users to create recovery media](bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md)">Bare metal reset/recovery: enable your users to create recovery media</a> | <a href="create-media-to-run-push-button-reset-features-s14.md" data-raw-source="[Bare metal reset/recovery: create recovery media while deploying new devices](create-media-to-run-push-button-reset-features-s14.md)">Bare metal reset/recovery: create recovery media while deploying new devices</a> | <a href="add-a-script-to-push-button-reset-features.md" data-raw-source="[Add a script to push-button reset features](add-a-script-to-push-button-reset-features.md)">Add a script to push-button reset features</a> | <a href="combine-provisioning-packages-into-a-new-image.md" data-raw-source="[Create a provisioning package with Windows desktop applications](combine-provisioning-packages-into-a-new-image.md)">Create a provisioning package with Windows desktop applications</a> </p></td>
+<td align="left"><p><a href="deploy-push-button-reset-features.md" data-raw-source="[Deploy push-button reset features using ScanState](deploy-push-button-reset-features.md)">Deploy push-button reset features using ScanState</a> | <a href="deploy-pbr-features-using-auto-apply.md">Deploy push-button reset features using Auto-Apply folders</a> | <a href="add-a-script-to-push-button-reset-features.md" data-raw-source="[Add extensibility scripts to push-button reset](add-a-script-to-push-button-reset-features.md)">Add extensibility scripts to push-button reset</a> | <a href="combine-provisioning-packages-into-a-new-image.md" data-raw-source="[Create a provisioning package with Windows desktop applications](combine-provisioning-packages-into-a-new-image.md)">Create a provisioning package with Windows desktop applications</a>
+</tr>
+<tr>
+<td align="left"><p><strong>Bare metal reset/recovery</strong></p></td>
+<td><a href="bare-metal-recovery.md">How bare metal reset/recovery works</a> | <a href="bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md" data-raw-source="[Bare metal reset/recovery: enable your users to create recovery media](bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md)">Enable your users to create recovery media</a> | <a href="create-media-to-run-push-button-reset-features-s14.md" data-raw-source="[Bare metal reset/recovery: create recovery media while deploying new devices](create-media-to-run-push-button-reset-features-s14.md)">Create recovery media while deploying new devices</a>  </p></td>
 </tr>
 <tr class="even">
 <td align="left"><p><strong>Configuration files</strong></p></td>

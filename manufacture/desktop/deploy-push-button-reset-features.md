@@ -1,10 +1,10 @@
 ---
-author: kpacquer
+
 Description: 'Push-button reset features are included with Windows 10 for desktop editions (Home, Pro, Enterprise, and Education), though you''ll need to perform additional steps to deploy PCs with the following customizations.'
 ms.assetid: f23d7e3f-0254-4fe8-9d61-5a58856c74be
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: 'Deploy push-button reset features'
-ms.author: kenpacq
+
 ms.date: 05/02/2017
 ms.topic: article
 ms.custom: RS5
@@ -144,13 +144,13 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
 **Step 5: Prepare push-button reset extensibility point scripts (optional)**
 
-1.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Refresh your PC feature runs:
+1.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Keep my files feature runs:
 
     A: At BasicReset\_BeforeImageApply
 
     B: At BasicReset\_AfterImageApply
 
-2.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Reset your PC feature runs:
+2.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Remove everything feature runs:
 
     C: At FactoryReset\_AfterDiskFormat
 
@@ -493,7 +493,7 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
 **Step 11: Verify your customizations**
 
-1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Refresh your PC and Reset your PC features from the following entry points:
+1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features from the following entry points:
 
     **Settings :** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
 
@@ -507,7 +507,7 @@ If you plan to use Push-button reset’s extensibility points, use the following
     4.  From the Choose an option screen, click **Troubleshoot**
     5.  Click **Recover from a drive** and then follow the on-screen instructions
 
-    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Refresh your PC** feature, whereas the **Remove everything** option corresponds to the **Reset your PC** feature.
+    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Keep my files** feature, whereas the **Remove everything** option corresponds to the **Remove everything** feature.
 
      
 

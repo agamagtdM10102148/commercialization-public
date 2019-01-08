@@ -1,15 +1,17 @@
 ---
-author: kpacquer
-Description: Apply Images Using DISM
+Description: Apply WIM Images Using DISM
 ms.assetid: f9e0727d-a210-4efa-85af-5b222c53624e
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Apply Images Using DISM
-ms.author: kenpacq
-ms.date: 12/20/2018
-ms.topic: article
----
 
-# Apply Images Using DISM
+ms.date: 12/14/2018
+ms.topic: article
+
+redirect_url: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/capture-and-apply-using-a-single-wim.md
+---
+<!--
+
+# Apply WIM Images Using DISM
 
 Deploy Windows images captured from your reference computer to one or more destination computers. 
 
@@ -27,7 +29,7 @@ Or, use the steps in this section to create your own scripts.
 ### .FFU images
 See [Windows Full Flash Update (FFU) images, Deploy FFU](deploy-windows-using-full-flash-update--ffu.md#DeployFFU)
 
-## .WIM images
+### .WIM images
 
 1. Boot the destination computer to Windows PE. For more information, see [Windows PE (WinPE) Technical Reference](winpe-intro.md).
 
@@ -99,11 +101,5 @@ Or, just reboot the PC. After a setup period, Windows starts the Out of Box Expe
 [Applying Images using a script](http://go.microsoft.com/fwlink/?LinkId=618399)
 
  
-
+-->
  
-
-
-
-
-
-

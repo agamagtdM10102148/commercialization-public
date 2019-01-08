@@ -1,10 +1,10 @@
 ---
-author: kpacquer
+
 Description: Audit Mode Overview
 ms.assetid: c4d7921f-0709-40bd-bbc5-38fd793d6b88
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Audit Mode Overview
-ms.author: kenpacq
+
 ms.date: 11/28/2017
 ms.topic: article
 
@@ -18,6 +18,8 @@ When Windows boots, it starts in either Out-Of-Box Experience (OOBE) mode or in 
 
 You can configure Windows to boot to audit mode instead. In audit mode, you can make additional changes to the Windows installation before you send the computer to a customer or capture the image for reuse in your organization. For example, you can install drivers included in a driver package, install applications, or make other updates that require the Windows installation to be running. When you use an answer file, Windows processes settings in the [auditSystem](auditsystem.md) and [auditUser](audituser.md) configuration passes.
 
+![Modify an image online: Start with an image file (either .wim or .ffu format). Apply it to a reference device. Modify it in Windows. Generalize it to prepare it for capturing. Capture the image into a new image file (either .wim or .ffu format). Apply it to new devices.](images/servicing_audit.png)
+
 When you boot to audit mode, you log into the system using the built-in administrator account. After you log on to the system, the built-in administrator account is immediately disabled during the [auditUser](audituser.md) configuration pass. The next time that the computer reboots, the built-in administrator account remains disabled. For more information, see [Enable and Disable the Built-in Administrator Account](enable-and-disable-the-built-in-administrator-account.md).
 
 **Important**  
@@ -30,7 +32,7 @@ When you boot to audit mode, you log into the system using the built-in administ
 -   If you're running scripts, installers, and diagnostic tools on Windows 10 S in Audit Mode, you may have to enable manufacturing mode for Windows 10 S. See [Manufacturing mode](windows-10-s-manufacturing-mode.md) for details.
  
 
-## <span id="Benefits_of_using_Audit_Mode"></span><span id="benefits_of_using_audit_mode"></span><span id="BENEFITS_OF_USING_AUDIT_MODE"></span>Benefits of using Audit Mode
+## Benefits of using Audit Mode
 
 
 In audit mode, you can do the following:

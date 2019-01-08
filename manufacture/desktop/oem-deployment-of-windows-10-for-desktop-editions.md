@@ -1,8 +1,8 @@
 ---
 title: OEM deployment of Windows 10 for desktop editions
-author: kpacquer
+
 description: Get step-by-step guidance for OEMs to deploy Windows 10 to desktop computers, laptops, and 2-in-1s. Find information about how to enable imageless, push-button reset recovery and more.  
-ms.author: kenpacq
+
 ms.date: 10/17/2017
 ms.topic: article
 ms.custom: RS5
@@ -693,7 +693,7 @@ Note: While it’s possible to add FODs using the /add-package command, we recom
 3. Add the .NET framework.
 
     ```
-    dism /image:C:\mount\windows /add-capability /capabilityname:NetFX3~~~ /Source:E:
+    dism /image:C:\mount\windows /add-capability /capabilityname:NetFX3~~~~ /Source:E:
     ```
     Where E: is the mounted FOD ISO.
 
@@ -1767,7 +1767,7 @@ Your PC will restart and boot into Windows for the first time.
 
 ### Verify Recovery
 
-1. Verify that your customizations are restored after recovery, and that they continue to function by running the Refresh your PC and Reset your PC features from the following entry points: 
+1. Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features from the following entry points: 
    - Settings 
    a.  From the Start Menu, click Settings, 
    b.  In the Settings app, click Update & security, and then click Recovery. 
@@ -1784,7 +1784,7 @@ Your PC will restart and boot into Windows for the first time.
    d. From the Choose an option screen, click Troubleshoot 
    e. Click Recover from a drive and then follow the on-screen instructions 
 
-**Note:** The Push-button reset UI has been redesigned in Windows 10. The Keep my files option in the UI now corresponds to the Refresh your PC feature. Remove everything corresponds to the Reset your PC feature.
+**Note:** The Push-button reset UI has been redesigned in Windows 10. The Keep my files option in the UI now corresponds to the Keep my files feature. Remove everything corresponds to the Remove everything feature.
 
 ## Optimize final image
 

@@ -1,16 +1,16 @@
 ---
-author: kpacquer
+
 Description: Service a Windows Image Using DISM
 ms.assetid: 7578765f-15ca-4cdd-9327-cfe42a36add2
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Service a Windows Image Using DISM
-ms.author: kenpacq
+
 ms.date: 05/02/2017
 ms.topic: article
 
-
+redirect_url: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/modify-an-image
 ---
-
+<!--
 # Service a Windows Image Using DISM
 
 
@@ -92,5 +92,5 @@ You can also use DISM to service an image online. If you have to boot the operat
 
 
 
-
+-->
 

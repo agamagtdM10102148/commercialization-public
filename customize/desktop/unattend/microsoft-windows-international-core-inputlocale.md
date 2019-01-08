@@ -7,8 +7,8 @@ MSHAttr:
 ms.assetid: 9c290797-cdde-41db-b3d8-3d03a7dc7cca
 ms.mktglfcycl: deploy
 ms.sitesec: msdn
-author: themar-msft
-ms.author: themar
+
+
 ms.date: 05/02/2017
 ms.topic: article
 
@@ -71,7 +71,6 @@ For a list of the Windows editions and architectures that this component support
 
 ## XML Example
 
-
 The following example shows how to set the input locale to the English (US) Dvorak keyboard.
 
 ```
@@ -80,6 +79,16 @@ The following example shows how to set the input locale to the English (US) Dvor
 <UILanguage>en-US</UILanguage> 
 <UserLocale>en-US</UserLocale>
 ```
+
+The following example shows how to set the input locale to the English International (US International) keyboard.
+
+```
+<InputLocale>0409:00020409</InputLocale>
+<SystemLocale>en-US</SystemLocale> 
+<UILanguage>en-US</UILanguage> 
+<UserLocale>en-US</UserLocale>
+```
+
 
 ## Related topics
 

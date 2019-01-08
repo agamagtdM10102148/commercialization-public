@@ -5,8 +5,8 @@ MSHAttr:
 - 'PreferredSiteName:MSDN'
 - 'PreferredLib:/library/windows/hardware'
 ms.assetid: 73c5bb46-bf9e-4657-a5ae-88dbd14b79e8
-author: themar-msft
-ms.author: themar
+
+
 ms.date: 05/02/2017
 ms.topic: article
 
@@ -279,7 +279,7 @@ $DefaultShellObject = $ShellLauncherClass.GetDefaultShell()
 
 # Set Internet Explorer as the shell for "Cashier", and restart the machine if it's closed.
 
-$ShellLauncherClass.SetCustomShell($Cashier_SID, "c:\program files\internet explorer\iexplore.ext www.microsoft.com", ($null), ($null), $restart_shell)
+$ShellLauncherClass.SetCustomShell($Cashier_SID, "c:\program files\internet explorer\iexplore.exe www.microsoft.com", ($null), ($null), $restart_shell)
 
 # Set Explorer as the shell for administrators.
 

@@ -1,8 +1,8 @@
 ---
 title: Suspend Services Duration
 description: On/Off assessment results for the suspend services transition phase 
-author: eliotgra
-ms.author: eliotgra
+
+
 ms.date: 11/17/2017
 ms.topic: article
 

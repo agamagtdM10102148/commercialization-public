@@ -1,10 +1,10 @@
 ---
-author: kpacquer
+
 Description: Disabling Secure Boot
 ms.assetid: 2b98718d-13ce-4a5d-bd89-d276a0dc493d
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Disabling Secure Boot
-ms.author: kenpacq
+
 ms.date: 05/02/2017
 ms.topic: article
 
@@ -63,7 +63,7 @@ For logo-certified Windows RT 8.1 and Windows RT PCs, Secure Boot is required 
 
 5.  If the PC is not able to boot after enabling Secure Boot, go back into the BIOS menus, disable Secure Boot, and try to boot the PC again.
 
-6.  In some cases, you may need to refresh or reset your PC to its original state before you can turn on Secure Boot. For more info, see [How to restore, refresh, or reset your PC](http://go.microsoft.com/fwlink/p/?linkid=279534).
+6.  In some cases, you may need to refresh or Remove everything to its original state before you can turn on Secure Boot. For more info, see [How to restore, refresh, or Remove everything](http://go.microsoft.com/fwlink/p/?linkid=279534).
 
 7.  If the above steps don’t work, and you still want to use the Secure Boot feature, contact your manufacturer for help.
 

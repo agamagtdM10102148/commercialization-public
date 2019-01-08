@@ -1,10 +1,9 @@
 ---
-author: kpacquer
+
 Description: 'Push-button reset features by default restore only drivers (installed through INF packages) and preinstalled Windows apps.'
 ms.assetid: 909227f2-8969-4ab3-b296-c54977a38977
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Recovery components
-ms.author: kenpacq
 ms.date: 12/18/2018
 ms.topic: article
 ms.custom: RS5
@@ -99,7 +98,7 @@ Most settings which are configured using unattend.xml and other configuration fi
 
 
 
-To learn how to author scripts to be run using extensibility points, see [Add a script to push-button reset features](add-a-script-to-push-button-reset-features.md).
+To learn how to author scripts to be run using extensibility points, see [Add extensibility scripts to push-button reset](add-a-script-to-push-button-reset-features.md).
 
 To learn how to use ScanState to capture and store the resulting PPKG under C:\\Recovery\\Customizations, which is restored automatically during PBR, see [Deploy push-button reset features using ScanState](deploy-push-button-reset-features.md).
 

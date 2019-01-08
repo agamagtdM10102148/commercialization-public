@@ -1,8 +1,6 @@
 ---
-author: kpacquer
 Description: 'Push-button reset features are included with Windows 10 for desktop editions (Home, Pro, Enterprise, and Education), though you''ll need to perform additional steps to deploy PCs with the following customizations.'
 title: 'Deploy push-button reset features with auto-apply folders'
-ms.author: kenpacq
 ms.date: 12/19/2018
 ms.topic: article
 ms.custom: RS5
@@ -137,11 +135,11 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
 
 2. Copy configuration files and the related asset files
 
-    - Copy the unattend.xml file you want for recovery to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`.
-    - Copy your LayoutModification.xml to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`
-    - Copy your TaskbarLayoutModification.xml to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`
+    - Copy your LayoutModification.xml to `C:\Recovery\AutoApply\` to `C:\Recovery\AutoApply\CustomizationFiles`
+    - Copy your TaskbarLayoutModification.xml to `C:\Recovery\AutoApply\` to `C:\Recovery\AutoApply\CustomizationFiles`
     - Copy `%windir%\System32\OOBE\info` and all its contents to `C:\Recovery\AutoApply\OOBE`
-    
+    - Copy the unattend.xml file you want for recovery to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`. Note, during a restore, the asset files will be restored to `C:\Windows\OEM\CustomizationFiles`.
+
 ## Step 5: Deploy and customize Windows
 
 1.  On the destination PC, boot to Windows PE.
@@ -288,7 +286,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
 
 ## Step 7: Verify your customizations
 
-1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Refresh your PC and Reset your PC features from the following entry points:
+1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features from the following entry points:
 
     **Settings :** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
 
@@ -302,7 +300,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     4.  From the Choose an option screen, click **Troubleshoot**
     5.  Click **Recover from a drive** and then follow the on-screen instructions
 
-    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Refresh your PC** feature, whereas the **Remove everything** option corresponds to the **Reset your PC** feature.
+    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Keep my files** feature, whereas the **Remove everything** option corresponds to the **Remove everything** feature.
 
      
 

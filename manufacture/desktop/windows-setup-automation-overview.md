@@ -1,10 +1,10 @@
 ---
-author: kpacquer
+
 Description: Windows Setup Automation Overview
 ms.assetid: 240b02ae-1f06-4b92-9b46-b4dbd1089c65
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Windows Setup Automation Overview
-ms.author: kenpacq
+
 ms.date: 05/02/2017
 ms.topic: article
 
@@ -63,6 +63,8 @@ If the update is delivered through Windows Update, Windows Setup searches in a d
 ## Use an answer file while installing Windows
 
 You can automate Windows installation by using an answer file:
+
+![Servicing with Setup: Start with a new device with a USB that contains Windows Setup, your Windows image file, and an unattend.xml customization file. Apply it to new devices.](images/servicing_unattend.png)
 
 **Use a USB flash drive**
 
