@@ -7,12 +7,12 @@ ms.date: 08/28/18
 ms.topic: article
 ms.custom: RS5
 ---
+> [!TIP]
+> For troubleshooting issues related to development, please read the [Troubleshooting doc](https://docs.microsoft.com/en-us/windows-hardware/manufacture/iot/troubleshooting) in our developer documentation.
 
 # Troubleshooting
 Having worked with a number of people, teams, and companies interested in commercializing, the Windows 10 IoT team decided to publish learnings from troubleshooting different issues. To find something specific, use Ctrl+F to find a word or phrase. Have any insight you want to add? Create a PR for this documentation or provident content feedback below.
 
-> [!NOTE]
-> This documentation is a work in progress. 
 
 ### Identifying SKU
 ```GetProductInfo API``` identifies the IoT Core SKU/Edition information.
