@@ -12,7 +12,7 @@ ms.custom: RS5
 
 You can service, or make changes to, a Windows image in different ways:
 
-* [Online servicing](audit-mode-overview.md): Update Windows from a familiar Windows environment. Apply your Windows image to a new reference device, and boot it into the built-in administrator account (audit mode). From here, you can add drivers, apps, and customizations. When you're done, prepare (generalize) the device and capture a new image file that can be applied to new devices. 
+* [Online servicing (audit mode)](audit-mode-overview.md): Update Windows from a familiar Windows environment. Apply your Windows image to a new reference device, and boot it into the built-in administrator account (audit mode). From here, you can add drivers, apps, and customizations. When you're done, prepare (generalize) the device and capture a new image file that can be applied to new devices. 
 
   ![Modify an image online: Start with an image file (either .wim or .ffu format). Apply it to a reference device. Modify it in Windows. Generalize it to prepare it for capturing. Capture the image into a new image file (either .wim or .ffu format). Apply it to new devices.](images/servicing_audit.png)
 
