@@ -117,13 +117,6 @@ ms.topic: article
 </tbody>
 </table>
 
- 
+**Related topics**
 
- 
-
- 
-
-
-
-
-
+[Push-button reset overview](push-button-reset-overview.md)

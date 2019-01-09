@@ -493,26 +493,15 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
 **Step 11: Verify your customizations**
 
-1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features from the following entry points:
+Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features. To start, check the following entry points:
 
-    **Settings :** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
+* **Settings:** From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Reset this PC: **Get started**. Follow the on-screen instructions.
 
-    **Windows RE**: From the Choose an option screen in Windows RE, click **Troubleshoot &gt; Reset this PC** and then follow the on-screen instructions
+* **Windows RE**: From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Advanced startup: **Restart now**. After Windows RE boots, select **Troubleshoot** > **Reset this PC** and then follow the on-screen instructions.
 
-2.  **Verify that recovery media can be created, and verify its functionality by running the bare metal recovery feature:**
-
-    1.  Launch Create a recovery drive from Control Panel.
-    2.  Follow the on-screen instructions to create the USB recovery drive.
-    3.  Boot the PC from the USB recovery drive
-    4.  From the Choose an option screen, click **Troubleshoot**
-    5.  Click **Recover from a drive** and then follow the on-screen instructions
-
-    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Keep my files** feature, whereas the **Remove everything** option corresponds to the **Remove everything** feature.
-
-     
+To test more recovery options, see [validation scenarios](desktop/pbr-validation.md).
 
 ## <span id="related_topics"></span>Related topics
-
 
 [ScanState Syntax](http://go.microsoft.com/fwlink/p/?linkid=615076)
 
