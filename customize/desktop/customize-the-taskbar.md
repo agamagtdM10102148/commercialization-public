@@ -38,7 +38,9 @@ For right-to-left languages, the taskbar icons are in the opposite order, with t
 
 To use a Taskbar Layout Modification XML file in Windows, you’ll need to add a registry key (LayoutXMLPath) to the image, and then generalize and recapture the image. The registry key must be processed before the specialize configuration pass. This means you won’t be able to simply add the registry key by using Synchronous Commands/FirstLogonCommands unless you plan to generalize the image afterwards.
 
-You can use any name or file location by defining this in the registry key; the filename and path to TaskbarLayoutModification.xml is not required. The other shortcut files, apps, and the Taskbar Layout Modification file itself can be changed at any time through regular imaging techniques. You can add this registry key to all your images, even if you intend to add taskbar links using the Classic Unattend method.
+We recommend using the file location `C:\Windows\OEM\TaskbarLayoutModification.xml`, because this is the default path used for [Push-button reset auto-apply folders](https://docs.microsoft.com/windows-hardware/manufacture/desktop/deploy-pbr-features-using-auto-apply). 
+
+The other shortcut files, apps, and the Taskbar Layout Modification file itself can be changed at any time through regular imaging techniques. You can add this registry key to all your images, even if you intend to add taskbar links using the Classic Unattend method.
 
 ## Configure taskbarlayoutmodification.xml
 
@@ -46,9 +48,10 @@ You can use any name or file location by defining this in the registry key; the 
 1. After the image boots, go into audit mode by pressing CTRL+SHIFT+F3.
 1. Add the following registry key to define a default location for the Taskbar Layout Modification file:
 
-   `cmd /c reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ /v LayoutXMLPath /d C:\Windows\Fabrikam\TaskbarLayoutModification.xml`
+   `cmd /c reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ /v LayoutXMLPath /d C:\Windows\OEM\TaskbarLayoutModification.xml`
 
-1. Add a Taskbar Layout Modification file (TaskbarLayoutModification.xml) in the default location for example: `C:\Windows\Fabrikam\TaskbarLayoutModification.xml`
+1. Add a Taskbar Layout Modification file (TaskbarLayoutModification.xml) in the default location, for example: `C:\Windows\OEM\TaskbarLayoutModification.xml`. We also recommend placing a backup copy of the file at `C:\Recovery\AutoApply\TaskbarLayoutModification.xml` so it will be restored during a [push-button reset](https://docs.microsoft.com/windows-hardware/manufacture/desktop/deploy-pbr-features-using-auto-apply).
+
 
     ```xml
     <?xml version="1.0" encoding="utf-8"?>

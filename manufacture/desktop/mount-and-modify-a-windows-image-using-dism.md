@@ -1,17 +1,13 @@
 ---
-
-Description: Modify a Windows Image Using DISM
+Description: Modify a Windows image using DISM
 ms.assetid: f48b4681-bc59-4eb1-89c9-0163594467f7
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: Modify a Windows Image Using DISM
-
-ms.date: 04/24/2018
+ms.date: 01/07/2019
 ms.topic: article
-
-
 ---
  
-# Modify a Windows Image Using DISM
+# Modify a Windows image using DISM
 
 You can make changes to offline mounted or applied Windows images without booting into the operating system you're going to modify.
 
@@ -23,7 +19,9 @@ When you apply an image that you're going to recapture, apply the image to the r
 
 You can mount and modify multiple images on a single computer. For more information, see [Deployment Image Servicing and Management (DISM) Best Practices](deployment-image-servicing-and-management--dism--best-practices.md).
 
-## <span id="Mounting_an_Image"></span><span id="mounting_an_image"></span><span id="MOUNTING_AN_IMAGE"></span>Mount an image
+![Modify an image offline: Start with an image file (either .wim or .ffu format). Mount the file using DISM. It appears as a group of folders. Modify it using DISM, adding drivers, languages, and more. Use DISM to unmount and commit the changes back to the original image file. Apply it to new devices.](images/servicing_mount.png)
+
+## Mount an image
 
 You can mount an image using the **/optimize** option to reduce initial mount time. However, When using the **/optimize** option, processes that are ordinarily performed during a mount will instead be completed the first time that you access a directory. As a result, there may be an increase in the time that is required to access a directory for the first time after mounting an image using the **/optimize** option.
 
@@ -43,7 +41,7 @@ You can mount an image using the **/optimize** option to reduce initial mount ti
 
     For more information about the options available for the **/Mount-Image** option in DISM, see [DISM Image Management Command-Line Options](dism-image-management-command-line-options-s14.md).
 
-## <span id="Modifying_an_Image"></span><span id="modifying_an_image"></span><span id="MODIFYING_AN_IMAGE"></span>Modify an Image
+## Modify an image
 
 After you mount an image, you can use DISM to add and remove drivers, packages, language packs, enumerate drivers and packages, modify configuration settings, and more. 
 
@@ -63,13 +61,13 @@ See [Add or remove packages offline using DISM](add-or-remove-packages-offline-u
 
 See [Add and remove language packs offline using DISM](add-and-remove-language-packs-offline-using-dism.md) to learn how to work with languages.
 
-### <span id="Step_4__Upgrade_to_a_Higher_Edition_of_Windows"></span><span id="step_4__upgrade_to_a_higher_edition_of_windows"></span><span id="STEP_4__UPGRADE_TO_A_HIGHER_EDITION_OF_WINDOWS"></span>Upgrade to a higher Windows edition
+### Upgrade to a higher Windows edition
 
 Any changes you make to a mounted image are also applied to each potential target edition of Windows. Each target edition is staged in the image. The changes will not be lost when you upgrade to a higher edition of Windows. 
 
 See [Change the Windows image to a higher edition using DISM](change-the-windows-image-to-a-higher-edition-using-dism.md) to learn how to change editions.
 
-### <span id="Step_5__Reduce_the_Size_of_the_Image"></span><span id="step_5__reduce_the_size_of_the_image"></span><span id="STEP_5__REDUCE_THE_SIZE_OF_THE_IMAGE"></span>Reduce the Size of the Image
+### Reduce the size of an image
 
 You can use DISM to reduce the footprint of a Windows image by cleaning up superseded components and resetting the base of the superseeded components.
 
@@ -79,11 +77,9 @@ You can use DISM to reduce the footprint of a Windows image by cleaning up super
     Dism /Image:C:\test\offline /cleanup-image /StartComponentCleanup /ResetBase 
     ```
 
-## <span id="Committing_Changes_to_an_Image"></span><span id="committing_changes_to_an_image"></span><span id="COMMITTING_CHANGES_TO_AN_IMAGE"></span>Commit Changes to an Image
+## Commit changes to an image
 
 You can commit changes to an image without unmounting the image.
-
-**To commit changes:**
 
 -   At the administrator command prompt, type:
 
@@ -93,19 +89,16 @@ You can commit changes to an image without unmounting the image.
 
     Use **/CheckIntegrity** to detect and track .wim file corruption when you commit changes to the image. When you apply or mount the image, use **/CheckIntegrity** again to stop the operation if file corruption was detected. **/CheckIntegrity** cannot be used with virtual hard disk (VHD) files.
 
-## <span id="Unmounting_an_Image"></span><span id="unmounting_an_image"></span><span id="UNMOUNTING_AN_IMAGE"></span>Unmounting an Image
+## Unmounting an image
 
 
 After you modify a mounted image, you must unmount it. If you mounted your image with the default read/write permissions, you can commit your changes. This makes your modifications a permanent part of the image.
 
 If you modified an applied image, you don't have to do anything else. You'll see any changes you made when you boot the PC.
 
-**To unmount an image**
+1.  Open a command prompt or the Deployment and Imaging Tools Environment with administrator privileges.
 
-1.  Open a command prompt or the Deployment Tools Command Prompt with administrator privileges.
-
-
-2.  Use DISM to unmount the image.
+2.  Unmount the image.
 
     ```
     Dism /Unmount-image /MountDir:<target_mount_directory> {/Commit | /Discard}
@@ -116,8 +109,9 @@ If you modified an applied image, you don't have to do anything else. You'll see
     > [!important]
     > You must use either the **/commit** or **/discard** argument when you use the **/unmount** option.
 
-## <span id="Troubleshooting"></span><span id="troubleshooting"></span><span id="TROUBLESHOOTING"></span>Troubleshooting
+## Troubleshooting
 
+See [Repair a Windows Image](repair-a-windows-image.md).
 
 **If the DISM commands in this topic fail, try the following:**
 
@@ -135,13 +129,4 @@ If you modified an applied image, you don't have to do anything else. You'll see
 [DISM Image Management Command-Line Options](dism-image-management-command-line-options-s14.md)
 
 [Service a Windows Image Using DISM](service-a-windows-image-using-dism.md)
-
- 
-
- 
-
-
-
-
-
 

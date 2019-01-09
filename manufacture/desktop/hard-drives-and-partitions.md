@@ -124,7 +124,7 @@ We recommend adding a separate partition for the Windows Recovery Environment (W
 
 For BIOS/MBR-based systems, it's still possible to combine the Windows RE tools partition with the system partition. To save drive space, consider creating logical partitions to get around the four-partition limit. For more info, see [Configure more than four partitions on a BIOS/MBR-based hard disk](configure-more-than-four-partitions-on-a-biosmbr-based-hard-disk.md).
 
-For Windows 10 for desktop editions, it's no longer necessary to create and maintain a separate full-system recovery image. Windows can perform a refresh or reset using built-in tools.
+For Windows 10 for desktop editions, it's no longer necessary to create and maintain a separate full-system recovery image. Windows can perform a push-button reset using built-in tools.
 
 ### <span id="DataPartition"></span><span id="datapartition"></span><span id="DATAPARTITION"></span>Data partitions
 

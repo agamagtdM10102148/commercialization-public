@@ -21,7 +21,7 @@ Push-button reset features are included with Windows 10 for desktop editions (H
 
 These steps also show you how to add your own scripts during a reset to capture logs or perform other cleanup tasks.
 
-## <span id="Prerequisites"></span><span id="prerequisites"></span><span id="PREREQUISITES"></span>Prerequisites
+## Prerequisites
 
 
 To complete these procedures, you'll need a technician PC which has Windows 10 and the following Windows Assessment and Deployment Kit (ADK) for Windows 10 components installed. Note that starting with Windows 10, version 1809, WinPE is an addon to the ADK, and isn't included in the ADK installer:
@@ -41,7 +41,7 @@ For an overview of the entire deployment process, see the [Desktop manufacturing
 
 Use the follow steps to prepare the ScanState tool to capture Windows desktop applications after they have been installed:
 
-**Step 1: Prepare the ScanState tool**
+## Step 1: Prepare the ScanState tool
 
 1.  On the technician PC, copy the Windows ADK files from Windows User State Migration Tool (USMT) and Windows Setup to a working folder. You'll need to match the architecture of the destination device. You don't need to copy the subfolders.
 
@@ -55,7 +55,7 @@ Use the follow steps to prepare the ScanState tool to capture Windows desktop ap
 
 Use the following steps to customize your Windows RE boot image if additional drivers and language packs are needed.
 
-**Step 2: Extract and customize the Windows RE boot image (optional)**
+## Step 2: Extract and customize the Windows RE boot image (optional)
 
 1.  On the technician PC, click **Start**, and type deployment. Right-click **Deployment and Imaging Tools Environment** and then select **Run as administrator**.
 2.  In **Deployment and Imaging Tools Environment**, create the folder structure to store the Windows image and its mount point.
@@ -109,7 +109,7 @@ Use the following steps to customize your Windows RE boot image if additional dr
 
 If you are planning to customize only the settings common to all editions of Windows 10 (including Windows 10 Mobile), use the following steps to create a provisioning package which specifies settings to be restored during recovery:
 
-**Step 3: Create a provisioning package with settings to be restored (optional)**
+## Step 3: Create a provisioning package with settings to be restored (optional)
 
 1.  On the technician PC, start Windows Imaging and Configuration Designer (ICD).
 2.  Click **File** &gt; **New Project**.
@@ -127,7 +127,7 @@ If you are planning to customize only the settings common to all editions of Win
 
 If your customizations include settings specific to editions of Windows 10 for desktop editions, use the following steps to create an unattend.xml which specifies the settings to be restored during recovery:
 
-**Step 4: Create an unattend file to restore settings (optional)**
+## Step 4: Create an unattend file to restore settings (optional)
 
 1.  On the technician PC, start **Windows System Image Manager**.
 2.  Click **File** &gt; **Select Windows image**.
@@ -142,15 +142,15 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
  
 
-**Step 5: Prepare push-button reset extensibility point scripts (optional)**
+## Step 5: Prepare push-button reset extensibility point scripts (optional)
 
-1.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Refresh your PC feature runs:
+1.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Keep my files feature runs:
 
     A: At BasicReset\_BeforeImageApply
 
     B: At BasicReset\_AfterImageApply
 
-2.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Reset your PC feature runs:
+2.  Create scripts (.cmd) or executables (.exe) to run at the available extensibility points when the Remove everything feature runs:
 
     C: At FactoryReset\_AfterDiskFormat
 
@@ -189,14 +189,14 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
 5.  Save the ResetConfig.xml file together with the scripts that you created.
 
-**Step 6: Create bare-metal recovery configuration (optional)**
+## Step 6: Create bare-metal recovery configuration (optional)
 
 -   To specify the partition layout to be used when users perform bare metal recovery using recovery media created from their PCs, modify resetconfig.xml to include the following elements:
 
     ```
     <?xml version="1.0" encoding="utf-8"?>
     <Reset>
-                <SystemDisk>
+            <SystemDisk>
             <MinSize>160000</MinSize>
             <DiskpartScriptPath>ReCreatePartitions.txt</DiskpartScriptPath>
             <OSPartition>3</OSPartition>
@@ -210,11 +210,11 @@ If you plan to use Push-button reset’s extensibility points, use the following
     -   **MinSize** - Specifies the minimum size of the system disk in megabytes (MB). Recovery process will not proceed if the system disk does not meet this minimum size.
     -   **DiskpartScriptPath** - Path to Diskpart script relative to install.wim location. The script should assume that all existing partitions have been deleted, and the system disk has focus in Diskpart.
     -   **OSPartition** - The partition to which the recovery image should be applied must be specified. The ESP or active partition must be on the same disk as the OS.
-    -   **WindowsREPartition**; **WindowsREPath –** (Optional) The location in which WinRE should be staged. The WinRE boot image on the media will be copied and registered with the OS. (Same as running “reagentc.exe /setreimage”)
+    -   **WindowsREPartition**; **WindowsREPath** (Optional) The location in which WinRE should be staged. The WinRE boot image on the media will be copied and registered with the OS. (Same as running “reagentc.exe /setreimage”)
 
     If partitioning information is not specified in resetconfig.xml, users can still perform bare metal recovery using media they have created. However, the default/recommended partition layout for Windows 10 will be used instead.
 
-**Step 7: Create a diskpart script for initial deployment**
+## Step 7: Create a diskpart script for initial deployment
 
 1.  Create a disk partitioning script for initial deployment.
 
@@ -283,7 +283,7 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
 2.  Name the script CreatePartitions-UEFI or CreatePartitions-BIOS.txt, and save it to a network location, or USB flash drive. Note: In these Diskpart examples, the partitions are assigned the letters S:\\, W:\\, and T:\\ to simplify partition identification. After the PC reboots, Windows PE automatically assigns the letter C:\\ to the Windows partition. The other partitions do not receive drive letters.
 
-**Step 8: Create a diskpart script for bare-metal recovery (optional)**
+## Step 8: Create a diskpart script for bare-metal recovery (optional)
 
 1.  Create a diskpart script for bare-metal recovery.
 
@@ -350,7 +350,7 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
 2.  Name the script RecreatePartitions-UEFI.txt or RecreatePartitions-BIOS.txt, and save it to the same network location, or USB flash drive as create partitions.
 
-**Step 9: Deploy and customize Windows**
+## Step 9: Deploy and customize Windows
 
 1.  On the destination PC, boot to Windows PE.
 2.  At the Windows PE command prompt, run the script to create the recommended hard drive partitions.
@@ -434,7 +434,7 @@ If you plan to use Push-button reset’s extensibility points, use the following
     DISM.exe /Cleanup-Image /StartComponentCleanup
     ```
 
-**Step 10: Capture and deploy customizations for recovery**
+## Step 10: Capture and deploy customizations for recovery
 
 1.  Use the ScanState tool to capture the installed customizations into a provisioning package. Use the /config option to specify one of the default configuration files included with the ADK, and save the .ppkg file in the folder C:\\Recovery\\Customizations.
 
@@ -491,41 +491,20 @@ If you plan to use Push-button reset’s extensibility points, use the following
 
 7.  Shut down the destination PC for packaging and shipment. When the user starts the PC for the first time, it will boot to OOBE.
 
-**Step 11: Verify your customizations**
+## Step 11: Verify your customizations
 
-1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Refresh your PC and Reset your PC features from the following entry points:
+Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features. To start, check the following entry points:
 
-    **Settings :** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
+* **Settings:** From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Reset this PC: **Get started**. Follow the on-screen instructions.
 
-    **Windows RE**: From the Choose an option screen in Windows RE, click **Troubleshoot &gt; Reset this PC** and then follow the on-screen instructions
+* **Windows RE**: From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Advanced startup: **Restart now**. After Windows RE boots, select **Troubleshoot** > **Reset this PC** and then follow the on-screen instructions.
 
-2.  **Verify that recovery media can be created, and verify its functionality by running the bare metal recovery feature:**
-
-    1.  Launch Create a recovery drive from Control Panel.
-    2.  Follow the on-screen instructions to create the USB recovery drive.
-    3.  Boot the PC from the USB recovery drive
-    4.  From the Choose an option screen, click **Troubleshoot**
-    5.  Click **Recover from a drive** and then follow the on-screen instructions
-
-    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Refresh your PC** feature, whereas the **Remove everything** option corresponds to the **Reset your PC** feature.
-
-     
+To test more recovery options, see [validation scenarios](pbr-validation.md).
 
 ## <span id="related_topics"></span>Related topics
-
 
 [ScanState Syntax](http://go.microsoft.com/fwlink/p/?linkid=615076)
 
 [Bare metal reset/recovery: Create recovery media while deploying new devices](create-media-to-run-push-button-reset-features-s14.md)
 
 [Deploy push-button reset features using ScanState](http://go.microsoft.com/fwlink/?LinkId=615126)
-
- 
-
- 
-
-
-
-
-
-

@@ -64,6 +64,8 @@ If the update is delivered through Windows Update, Windows Setup searches in a d
 
 You can automate Windows installation by using an answer file:
 
+![Servicing with Setup: Start with a new device with a USB that contains Windows Setup, your Windows image file, and an unattend.xml customization file. Apply it to new devices.](images/servicing_unattend.png)
+
 **Use a USB flash drive**
 
 1.  Use a sample answer file or create your own with Windows System Image Manager (Windows SIM).

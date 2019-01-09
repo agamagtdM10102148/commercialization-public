@@ -453,7 +453,7 @@ xcopy /h %recoveryfolder%Winre.wim R:\Recovery\WindowsRE\
 
 ApplyRecovery.bat relies on the following  DiskPart scripts, which must be placed in the same folder:
 
-#### CreateRecoveryPartitions-UEFI.txt
+#### <span id="create-recovery-partitions"></span>CreateRecoveryPartitions-UEFI.txt
 
 ```
 rem == CreateRecoveryPartitions-UEFI.txt ==
@@ -586,9 +586,44 @@ Sample **LayoutModification.xml**:
 ```
 
 
+## TaskbarLayoutModification.xml
+
+You can pin apps to the taskbar. To learn more, see [OEM Taskbar tiles](https://docs.microsoft.com/windows-hardware/customize/desktop/customize-the-taskbar).
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutModificationTemplate
+xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"
+xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout"
+xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout"
+xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout"
+Version="1">
+
+<CustomTaskbarLayoutCollection PinListPlacement="Replace">
+    <defaultlayout:TaskbarLayout>
+        <taskbar:TaskbarPinList>
+            <taskbar:UWA AppUserModelID="Microsoft.Windows.Photos_8wekyb3d8bbwe!App" />
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Accessories\Paint.lnk"/>
+        </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+    <defaultlayout:TaskbarLayout Region="US|GB">
+        <taskbar:TaskbarPinList >
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Accessories\Notepad.lnk" />
+            <taskbar:UWA AppUserModelID="Microsoft.WindowsCalculator_8wekyb3d8bbwe!App" />
+        </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+    <defaultlayout:TaskbarLayout Region="CN|TW">
+        <taskbar:TaskbarPinList>
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Accessories\Notepad.lnk" />
+            <taskbar:UWA AppUserModelID="Microsoft.Windows.Photos_8wekyb3d8bbwe!App" />
+            <taskbar:DesktopApp DesktopApplicationLinkPath="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Accessories\Paint.lnk"/>
+        </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+</CustomTaskbarLayoutCollection>
+</LayoutModificationTemplate>
+```
 
 ## <span id="BootToAudit"></span><span id="boottoaudit"></span><span id="BOOTTOAUDIT"></span>BootToAudit
-
 
 Add an answer file to the Windows image in C:\\mount\\windows\\Windows\\Panther\\unattend.xml to instruct it to boot into audit mode. You can create this answer file in Windows System Image Manager.
 
@@ -651,7 +686,7 @@ rem Recommended: Create a pagefile for devices with 1GB or less of RAM.
 wpeutil CreatePageFile /path=%TARGETOSDRIVE%\PageFile.sys /size=256
 ```
 
-To learn more about using extensibility points for push-button reset, see [Add a script to push-button reset features](http://go.microsoft.com/fwlink/?LinkId=618946).
+To learn more about using extensibility points for push-button reset, see [Add extensibility scripts to push-button reset](http://go.microsoft.com/fwlink/?LinkId=618946).
 
 ## <span id="Reinstall_Windows_inbox_apps"></span>Reinstall Windows inbox apps
 

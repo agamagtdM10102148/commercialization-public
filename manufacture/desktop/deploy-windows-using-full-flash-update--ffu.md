@@ -3,15 +3,14 @@
 Description: 'Deploy Windows faster on the factory floor by using the Full Flash Update (FFU) image format.'
 ms.assetid: af2b402f-9a5c-4c6a-8852-61039e5bec2a
 MSHAttr: 'PreferredLib:/library/windows/hardware'
-title: 'Windows Full Flash Update (FFU) images'
-
-ms.date: 10/17/2017
+title: 'Capture and apply Windows Full Flash Update (FFU) images'
+ms.date: 1/7/2019
 ms.topic: article
 
 
 ---
 
-# Windows Full Flash Update (FFU) images
+# Capture and apply Windows Full Flash Update (FFU) images
 
 Deploy Windows faster on the factory floor by using the Full Flash Update (FFU) image format. FFU images allow you to apply an image of a physical drive, including Windows, recovery, and system partition information all at once directly to a different drive.
 
@@ -22,7 +21,6 @@ Starting with Windows 10, version 1709, DISM has the ability to capture, deploy,
 - FFU captures of encrypted disks are not supported
 - Captures of disks that have [Volume Shadow Copy Service (VSS)](https://technet.microsoft.com/en-us/library/ee923636.aspx) enabled are not supported
 - Splitting compressed FFUs is not supported
-
 
 ## What you need to work with FFUs in Windows
 

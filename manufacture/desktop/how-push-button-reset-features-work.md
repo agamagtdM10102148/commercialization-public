@@ -54,28 +54,7 @@ To restore Windows desktop applications and settings, you can use provisioning p
 To learn more, see [Deploy push-button reset features using ScanState](deploy-push-button-reset-features.md) and [Deploy push-button reset features using Auto-apply folders](deploy-pbr-features-using-auto-apply.md) .
  
 
-## <span id="Refresh_your_PC"></span><span id="refresh_your_pc"></span><span id="REFRESH_YOUR_PC"></span>Keep my files
-
-
-The **Keep my files** feature can be summarized in the following steps:
-
-Note that if using Auto-apply folders, you don't need to supply scripts for any of the extensibility points. If you have extensibility points, they will take precedence over the Auto-apply folders, and Auto-apply folders won't be processed.
-
-1.  PC boots into the Windows Recovery Environment (Windows RE).
-2.  **EXTENSIBILITY POINT A**: OEMs can optionally add a script here. (See [Extensibility points](#extensibility-points) later in this topic).
-3.  User accounts, settings, and data are gathered and moved to a temporary location.
-4.  A new copy of the OS is constructed in a temporary location using files from the Windows Component Store.
-5.  Customizations stored in provisioning packages under C:\\Recovery\\Customizations are applied to the new OS.
-6.  Drivers are copied from the existing OS and injected into the new OS.
-7.  Preinstalled Windows apps are restored from their backup location.
-8.  System-critical settings are applied to the new OS.
-9.  Existing OS is moved to C:\\Windows.old.
-10. New OS is moved to the root of the OS volume.
-11. **EXTENSIBILITY POINT B**: OEMs can optionally add a script here. (See [Extensibility points](#extensibility-points) later in this topic).
-12. PC reboots to the new OS.
-13. During first boot, user data and settings are reapplied.
-
-### <span id="Preserved_settings"></span><span id="preserved_settings"></span><span id="PRESERVED_SETTINGS"></span>Preserved settings
+## Keep my files
 
 The **Keep my files** feature preserves a number of system and user settings that are required to keep the system running while minimizing the need for users to reconfigure their PCs.
 
@@ -87,6 +66,7 @@ Preserved settings can be broadly categorized into one of the following categori
 -   Affect system security or user privacy.
 -   Personalize the PC.
 
+### Settings
 The preserved settings are summarized as follows:
 
 -   User accounts (local, domain, Microsoft account), and group memberships
@@ -129,29 +109,7 @@ Applications are handled as follows:
 
 The **Keep my files** feature does not preserve user-installed Windows desktop applications by default, and locations that are commonly used for storing application settings (\\AppData and \\ProgramData) are deleted. Manufacturers can leverage Auto-apply folders or the push-button reset extensibility points to save and later restore specific application settings and data, if necessary.
 
-## <span id="Reset_your_PC"></span><span id="reset_your_pc"></span><span id="RESET_YOUR_PC"></span>Remove everything 
-
-
-The **Remove everything** feature can be summarized in the following steps:
-
-Note that if using Auto-apply folders, you don't need to supply scripts for any of the extensibility points. If you have extensibility points, they will take precedence over the Auto-apply folders, and Auto-apply folders won't be processed.
-
-1.  PC boots into the Windows Recovery Environment (Windows RE).
-2.  User accounts, data and installed Windows apps and Windows desktop applications are removed from the OS volume.
-3.  Data volumes are formatted (if requested by the user).
-4.  Data erasure is performed on OS and data volumes (if requested by the user).
-5.  **EXTENSIBILITY POINT C**: OEMs can optionally add a script here. (See [Extensibility points](#extensibility-points) later in this topic).
-6.  A new copy of the OS is constructed in a temporary location using files from the Windows Component Store.
-7.  Customizations stored in provisioning packages under C:\\Recovery\\Customizations are applied to the new OS.
-8.  Drivers are copied from the existing OS and injected into the new OS.
-9.  Preinstalled Universal Windows apps are restored from their backup location.
-10. Existing OS is removed.
-11. New OS is moved to the root of the OS volume.
-12. **EXTENSIBILITY POINT D**: OEMs can optionally add a script here. (See [Extensibility points](#extensibility-points) later in this topic).
-13. PC reboots to the new OS.
-14. OOBE starts.
-
-### <span id="Data_removal_options"></span><span id="data_removal_options"></span><span id="DATA_REMOVAL_OPTIONS"></span>Data removal options
+## Remove everything 
 
 When users use the **Remove everything** feature, they will be presented with options that affect the way that their data is removed from the PC.
 
@@ -172,130 +130,7 @@ The time it takes to perform data erasure depends on drive speed, partition size
 
 If [Compact OS](compact-os.md) is enabled on the OS before the reset, Compact OS will remain enabled after the PC has been reset. 
 
-## <span id="Bare_metal_recovery"></span><span id="bare_metal_recovery"></span><span id="BARE_METAL_RECOVERY"></span>Bare metal recovery
 
-
-If the user needs to replace their hard drive or completely wipe it, they can use bootable recovery media to perform bare metal recovery. Bare metal recovery removes all existing partitions on the system disk and recreates all partitions, before restoring software onto the PC. Two types of recovery media are supported:
-
--   **[User-created recovery media](bare-metal-resetrecovery-enable-your-users-to-create-media-and-to-recover-hard-drive-space.md)** using the **Create a recovery drive** utility in Windows 10. This backs up the files needed to restore the PC to a pristine state.
--   **[Manufacturer-created recovery media](create-media-to-run-push-button-reset-features-s14.md)** for support and refurbishing scenarios by placing a recovery image on a piece of bootable Windows RE media.
-
-**When user-created recovery media are used, the bare metal recovery feature can be summarized in the following steps:**
-
-1.  The system disk is identified.
-2.  All partitions from the system disk are removed.
-3.  Data erasure is performed on the system disk (if requested by the user).
-4.  Factory or default partition layout is recreated on the system disk.
-5.  All partitions are formatted.
-6.  Recovery files from recovery media are copied to the OS volume.
-7.  A new copy of the OS is constructed at the root of the OS volume.
-8.  Customizations stored in provisioning packages are applied.
-9.  Drivers are injected into the new OS.
-10. Preinstalled Windows apps are restored.
-11. Boot files are configured on the system partition.
-12. PC reboots to the new OS.
-13. OOBE starts.
-
-### <span id="Data_removal_options"></span><span id="data_removal_options"></span><span id="DATA_REMOVAL_OPTIONS"></span>Data removal options
-
-When users use the bare metal recovery feature, they can choose to perform data erasure on the entire system disk before the factory partition layout is reapplied. On most PCs, this data erasure process is done in software, writing cryptographically random patterns to the entire LBA range of the system disk once.
-
-However, on certain hardware configurations, the data erasure process is performed by the storage device’s hardware controller. This often takes less time to complete and is usually more thorough in removing remnant data. Hardware-based data erasure is supported on PCs with storage devices which meet the following criteria:
-
--   eMMC
--   Supports the **Secure Trim** and **Sanitize** commands
-
-### <span id="System_disk_selection"></span><span id="system_disk_selection"></span><span id="SYSTEM_DISK_SELECTION"></span>System disk selection
-
-Bare metal recovery automatically identifies the system disk using the following methods:
-
--   Adaptor location path and GUID of the system disk are written to a UEFI variable during OOBE.
-    -   Performed only when both the system and Windows partitions are on the system disk.
-
-    -   The variable is updated if necessary when Windows RE gets disabled and then re-enabled.
-
--   During bare metal recovery, if multiple internal disks are detected, the system disk is searched in this order:
-    -   Disk with GUID matching the value stored in the UEFI variable.
-    -   Disk with location path matching the value stored in firmware.
-    -   Disk with an existing ESP.
-        -   If multiple disks with ESP are found, bare metal recovery will not proceed.
-    -   Uninitialized (raw) disk.
-        -   If multiple uninitialized disks are found, bare metal recovery will not proceed.
--   On legacy BIOS/MBR systems, the BIOS-reported system disk is used.
-
-### <span id="User-created_recovery_media"></span><span id="user-created_recovery_media"></span><span id="USER-CREATED_RECOVERY_MEDIA"></span>User-created recovery media
-
-When users create USB recovery media using the **Create a recovery drive** utility, the resulting media always contain a bootable copy of Windows RE. This gives users access to troubleshooting and recovery tools when booting from recovery media.
-
-Users can optionally back up files required to perform bare metal recovery. When the option is selected, the following are copied onto the USB recovery media as well:
-
--   Windows Component Store
--   Installed drivers
--   Backup of preinstalled Windows apps
--   Provisioning packages containing preinstalled customizations (under C:\\Recovery\\Customizations)
--   Push-button Reset configuration XML and scripts (under C:\\Recovery\\OEM)
-
-### <span id="Manufacturer-created_recovery_media"></span><span id="manufacturer-created_recovery_media"></span><span id="MANUFACTURER-CREATED_RECOVERY_MEDIA"></span>Manufacturer-created recovery media
-
-Bare metal recovery supports the use of a recovery WIM image when the media are prepared by manufacturers. This type of media is primarily used in support and refurbishing scenarios.
-
-Manufacturer-created media must contain the following:
-
-1.  A bootable Windows RE image.
-2.  A Push-button reset-compatible recovery image (install.wim).
-3.  A Push-button reset configuration file (Resetconfig.xml) which specifies disk partitioning information.
-4.  A DISKPART script to perform partitioning of the disk.
-
-### <span id="extensibility-points"></span><span id="EXTENSIBILITY-POINTS"></span>Extensibility points for push-button reset features
-
-Push-button reset provides extensibility points where manufacturers can insert custom operations when a user runs the **Keep my files** and **Remove everything** features. If you use Auto-apply folders, you shouldn't configure extensibility points. If you have both Auto-apply folders and extensibilty scripts, PBR won't use the Auto-apply folders.
-
-See the sections above to see where the custom operations that can be executed for these features appear.
-
-The extensibility points for **Keep my files** are summarized in the following table:
-
-|            |                                                                                                                            |                                                                                                                                                   |
-|------------|----------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Ext. point | System state                                                                                                               | Example usage                                                                                                                                     |
-| A          | Settings and data to be migrated have been moved to a temporary location                                                   | Copy files, drivers, or settings that are not migrated by default when the user runs the **Keep my files** feature.                                 |
-| B          | The OS has been rebuilt. Drivers and customizations have been reapplied. Only critical system settings have been migrated. | Restore customization files (e.g. unattend.xml, layoutmodification.xml), or files and settings you might have backed up at extensibility point A. |
-
- 
-
-The extensibility points for **Remove everything** are summarized in the following table:
-
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Ext. point</td>
-<td align="left">System state</td>
-<td align="left">Example usage</td>
-</tr>
-<tr class="even">
-<td align="left">C</td>
-<td align="left">All user data have been removed from the Windows partition and data partitions have (optionally) been formatted.</td>
-<td align="left">Reconfigure data partitions if needed.
-<div class="alert">
-<strong>Important</strong>  Do not modify the Windows partition.
-</div>
-<div>
- 
-</div></td>
-</tr>
-<tr class="odd">
-<td align="left">D</td>
-<td align="left">The OS has been rebuilt. Drivers and customizations have been reapplied.</td>
-<td align="left">Restore customization files (e.g. unattend.xml, layoutmodification.xml), or apply additional customizations.</td>
-</tr>
-</tbody>
-</table>
-
- 
 
 ## <span id="Compact_OS"></span><span id="compact_os"></span><span id="COMPACT_OS"></span>Compact OS
 
@@ -311,38 +146,8 @@ The following diagram illustrates the high-level content layout of PCs with Comp
 
 Both technologies are optional and can be configured during deployment.
 
-## <span id="Updating_the_on-disk_Windows_Recovery_Environment"></span><span id="updating_the_on-disk_windows_recovery_environment"></span><span id="UPDATING_THE_ON-DISK_WINDOWS_RECOVERY_ENVIRONMENT"></span>Updating the on-disk Windows Recovery Environment
-
-
-In Windows 10, the on-disk copy of Windows RE can be serviced as part of rollup updates for the OS. Not all rollup updates will service Windows RE.
-
-Unlike the normal OS update process, updates for Windows RE do not directly serviced the on-disk Windows RE image (winre.wim). Instead, a newer version of the Windows RE image replaces the existing one, with the following contents being injected or migrated into the new image:
-
--   Boot critical and input device drivers from the full OS environment are added to the new Windows RE image.
--   Windows RE customizations under \\Sources\\Recovery of the mounted winre.wim are migrated to the new image.
-
-The following contents from the existing Windows RE image are not migrated to the new image:
-
--   Drivers which are in the existing Windows RE image but not in the full OS environment
--   Windows PE optional components which are not part of the default Windows RE image
--   Language packs for Windows PE and optional components
-
-The Windows RE update process makes every effort to reuse the existing Windows RE partition without any modification. However, in some rare situations where the new Windows RE image (along with the migrated/injected contents) does not fit in the existing Windows RE partition, the update process will behave as follows:
-
--   If the existing Windows RE partition is located immediately after the Windows partition, the Windows partition will be shrunk and space will be added to the Windows RE partition. The new Windows RE image will be installed onto the expanded Windows RE partition.
--   If the existing Windows RE partition is not located immediately after the Windows partition, the Windows partition will be shrunk and a new Windows RE partition will be created. The new Windows RE image will be installed onto this new Windows RE partition. The existing Windows RE partition will be orphaned.
--   If the existing Windows RE partition cannot be reused and the Windows partition cannot successfully be shrunk, the new Windows RE image will be installed onto the Windows partition. The existing Windows RE partition will be orphaned.
-
-**Important**  To ensure that your customizations continue to work after Windows RE has been updated, they must not depend on functionalities provided by Windows PE optional components which are not in the default Windows RE image (e.g. WinPE-NetFX). To facilitate development of Windows RE customizations, the WinPE-HTA optional component has been added to the default Windows RE image in Windows 10.
-
- 
-
-**Note**  The new Windows RE image deployed as part of the rollup update contains language resources only for the system default language, even if the existing Windows RE image contains resources for multiple languages. On most PCs, the system default language is the language selected at the time of OOBE.
-
- 
-
- 
-
+## Related topics
+[Bare metal recovery](bare-metal-recovery.md)
  
 
 

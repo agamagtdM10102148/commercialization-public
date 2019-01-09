@@ -1,9 +1,7 @@
 ---
-
 Description: 'Push-button reset features are included with Windows 10 for desktop editions (Home, Pro, Enterprise, and Education), though you''ll need to perform additional steps to deploy PCs with the following customizations.'
 title: 'Deploy push-button reset features with auto-apply folders'
-
-ms.date: 10/02/2018
+ms.date: 12/19/2018
 ms.topic: article
 ms.custom: RS5
 ---
@@ -135,13 +133,18 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     MkDir C:\Recovery\AutoApply
     ```
 
-2. Copy configuration files and the related asset files
+2. Copy configuration files and any related asset files into the Autoapply folders: 
 
-    - Copy the unattend.xml file you want for recovery to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`. ()
-    - Copy your LayoutModification.xml to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`
-    - Copy your TaskbarLayoutModification.xml to `C:\Recovery\AutoApply\` and any asset files to `C:\Recovery\AutoApply\CustomizationFiles`
-    - Copy `%windir%\System32\OOBE\info` and all its contents to `C:\Recovery\AutoApply\OOBE`
-    
+   | Description | Files to be copied| Where to put it | During a restore, where does it go? |
+   |------------|------------------|------------------------|-------------|
+   |Start menu  | LayoutModification.xml| `C:\Recovery\AutoApply\` | `%SYSTEMDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\Shell`
+   | Taskbar pins| TaskbarLayoutModification.xml |`C:\Recovery\AutoApply\` | `C:\Windows\OEM\TaskbarLayoutModification.xml` |
+   | OOBE.xml | `%windir%\System32\OOBE\info` | `C:\Recovery\AutoApply\OOBE` | `%windir%\System32\OOBE\info` |
+   | Unattend file | unattend.xml | `C:\Recovery\AutoApply\` | `C:\Windows\Panther\Unattend.xml`|
+   | Other asset files   |   | `C:\Recovery\AutoApply\CustomizationFiles` |  `C:\Windows\OEM\CustomizationFiles` |
+
+   Note, don't worry about restoring link (.lnk) files used by the Start menu and Taskbar. These are saved and restored using [provisioning packages](#scanstate).
+
 ## Step 5: Deploy and customize Windows
 
 1.  On the destination PC, boot to Windows PE.
@@ -227,7 +230,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     DISM.exe /Cleanup-Image /StartComponentCleanup
     ```
 
-## Step 6: Capture and deploy customizations for recovery
+## <span id="scanstate"></span>Step 6: Capture and deploy customizations for recovery
 
 1.  Use the ScanState tool to capture the installed customizations into a provisioning package. Use the /config option to specify one of the default configuration files included with the ADK, and save the .ppkg file in the folder C:\\Recovery\\Customizations.
 
@@ -245,7 +248,7 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
 
     where N:\\ is the location where the additional provisioning packages are located.
 
-3.  Copy any Push-button reset configuration file (resetconfig.xml) and related scripts to the destination PC, and then configure permissions to write/modify them. For example:
+3.  Copy any Push-button reset configuration file (resetconfig.xml) to the destination PC, and then configure permissions to write/modify them. For example:
 
     ```cmd
     mkdir C:\Recovery\OEM
@@ -261,7 +264,10 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
     icacls C:\Recovery\Customizations / grant:r *S-1-5-32-544:(F) /T
     icacls C:\Recovery\OEM /inheritance:r /T
     icacls C:\Recovery\OEM /grant:r SYSTEM:(F) /T
-    icacls C:\Recovery\OEM / grant:r *S-1-5-32-544:(F) /T
+    icacls C:\Recovery\OEM /grant:r *S-1-5-32-544:(F) /T
+    icacls C:\Recovery\AutoApply /inheritance:r /T
+    icacls C:\Recovery\AutoApply /grant:r SYSTEM:(F) /T
+    icacls C:\Recovery\AutoApply /grant:r *S-1-5-32-544:(F) /T
     attrib +H C:\Recovery
     ```
 
@@ -285,23 +291,13 @@ Auto-apply folders are new in Windows 10, version 1809. These folders make it ea
 
 ## Step 7: Verify your customizations
 
-1.  Verify that your customizations are restored after recovery, and that they continue to function by running the Refresh your PC and Reset your PC features from the following entry points:
+Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features. To start, check the following entry points:
 
-    **Settings :** From the Start Menu, click **Settings &gt; Update & security &gt; Recovery**. Click the **Get Started** button under **Reset this PC** and follow the on-screen instructions.
+* **Settings:** From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Reset this PC: **Get started**. Follow the on-screen instructions.
 
-    **Windows RE**: From the Choose an option screen in Windows RE, click **Troubleshoot &gt; Reset this PC** and then follow the on-screen instructions
+* **Windows RE**: From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Advanced startup: **Restart now**. After Windows RE boots, select **Troubleshoot** > **Reset this PC** and then follow the on-screen instructions.
 
-2.  **Verify that recovery media can be created, and verify its functionality by running the bare metal recovery feature:**
-
-    1.  Launch Create a recovery drive from Control Panel.
-    2.  Follow the on-screen instructions to create the USB recovery drive.
-    3.  Boot the PC from the USB recovery drive
-    4.  From the Choose an option screen, click **Troubleshoot**
-    5.  Click **Recover from a drive** and then follow the on-screen instructions
-
-    **Note**  The Push-button reset UI has been redesigned in Windows 10. The **Keep my files** option in the UI now corresponds to the **Refresh your PC** feature, whereas the **Remove everything** option corresponds to the **Reset your PC** feature.
-
-     
+To test more recovery options, see [validation scenarios](pbr-validation.md).
 
 ## <span id="related_topics"></span>Related topics
 

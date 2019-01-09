@@ -81,7 +81,7 @@ The following table shows customizations in Windows 10 in S mode, the mechanism 
 | [Language Packs](language-packs-and-windows-deployment.md)                                                     | DISM                                 | Offline, WinPE, Audit Mode |
 | [Features on Demand](features-on-demand-v2--capabilities.md)                                                   | DISM                                 | Offline, WinPE, Audit Mode |
 | [Start Menu Layout](customize-the-start-screen.md)                                                             | layoutmodification.xml               | N/A                        |
-| [OEM Taskbar tiles](https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/customize-the-taskbar) | taskbarlayoutmodification.xml        | N/A                        |
+| [OEM Taskbar tiles](https://docs.microsoft.com/windows-hardware/customize/desktop/customize-the-taskbar) | taskbarlayoutmodification.xml        | N/A                        |
 | InkWorkstationTiles                                                                                            | InkWorkstationLayoutModification.xml | N/A                        |
 | [OOBE customizations](configure-oobexml.md)                                                                    | OOBE.xml, OOBE folder structure      | OOBESystem pass            |
 | [UWP apps](https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide)      | DISM                                 | Offline, WinPE, Audit mode |

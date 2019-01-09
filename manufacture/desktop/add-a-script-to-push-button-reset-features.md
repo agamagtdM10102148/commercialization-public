@@ -3,78 +3,146 @@
 Description: 'You can customize the Push-button reset experience by configuring extensibility points. This enables you to run custom scripts, install additional applications, or preserve additional user or application data.'
 ms.assetid: 147358d0-bae5-4f48-b02d-1ccc48bdcc2e
 MSHAttr: 'PreferredLib:/library/windows/hardware'
-title: 'Add a script to push-button reset features'
-
-ms.date: 05/02/2017
+title: 'Add extensibility scripts to push-button reset'
+ms.date: 12/20/2018
 ms.topic: article
 ms.custom: RS5
 ---
 
-# Add a script to push-button reset features
+# Add extensibility scripts to push-button reset
 
+OEMs can insert custom extensibility scripts that run when a user runs the push-button reset features: **Keep my files** and **Remove everything**.
 
-You can customize the Push-button reset experience by configuring extensibility points. This enables you to run custom scripts, install additional applications, or preserve additional user or application data. If you've configured extensibility points in addition to Auto-apply folders, the extensibility points will be used and the Auto-apply folders will be ignored.
+You can use either extensibility scripts or [Auto-apply folders](recovery-strategy-for-common-customizations.md#auto-apply) to restore common customizations that aren't otherwise restored, including:
+* The Start Menu 
+* Taskbar
+* OOBE
+* Unattend.xml customizations
 
-## <span id="Prerequisites"></span><span id="prerequisites"></span><span id="PREREQUISITES"></span>Prerequisites
+In addition, extensibility scripts can help perform other tasks, like:
+* Modifying data or utility partitions
+* [Saving and restoring files](#preserving_and_retrieving_files) that aren't normally kept by the **Keep my files** feature.
 
+Note: If you include Auto-apply folders, you shouldn't include extensibility scripts. If you include both Auto-apply folders and extensibilty scripts, the Auto-apply folders will be ignored.
 
-To configure extensibility points and customize the Push-button reset experience, you need the following.
+**To configure the scripts**, add all of the following in the `C:\Recovery\OEM` folder:
 
--   A configuration file named ResetConfig.xml
--   Scripts that execute custom operations at selected extensibility points.
--   Any additional files required by the scripts
+* A push-button reset configuration file (ResetConfig.xml) that defines which scripts to run.
+* The extensibility scripts
+* Any files required by the extensibility scripts.
 
-Each script must meet the following requirements:
+## Extensibility scripts
 
--   Be an executable (.exe) or a command script (.cmd)
--   Run without displaying a graphical user interface (GUI)
--   Return either 0 to indicate a successful operation, or a non-zero value to indicate an unsuccessful operation
+**Requirements:**
+- The scripts are formatted as a .cmd or .exe files.
+- The scripts do not depend on Windows PE optional components not present in the default Windows RE image (winre.wim).
+- The scripts do not depend on binaries (e.g. .exe or .dll files) not present in the default Windows RE image (winre.wim).
+- The scripts run without displaying a graphical user interface (GUI).
+- The scripts complete all intended functions within 5 minutes for each extensibility point.
+- The script must not modify the drive letters. This can potentially cause the recovery to fail.
 
-These files should be placed in the folder C:\\Recovery\\OEM, and will automatically be detected by Push-button reset features. It's OK to use subfolders.
+The script must return a 0 (zero) if successful. If push-button reset receives a non-0 value, the following steps occur:
+- If running the **Keep my files** feature: All system changes are rolled back. If the script or executable file is initiated from the Windows **PC settings** menu, the system reboots in Windows. If the script or executable file is initiated from Windows RE or the **Boot Options** menu, the system remains in Windows RE and displays an error message.
+- If running the **Remove everything** feature: The failure is ignored. The script or executable file proceeds to the next step in the reset process and logs the failure.
 
-## <span id="Step_1__Creating_Configuration_Files_to_Prepare_for_Recovery"></span><span id="step_1__creating_configuration_files_to_prepare_for_recovery"></span><span id="STEP_1__CREATING_CONFIGURATION_FILES_TO_PREPARE_FOR_RECOVERY"></span>Step 1: Creating Configuration Files to Prepare for Recovery
+## Push-button reset configuration file (ResetConfig.xml)
+Add a [ResetConfig.xml](resetconfig-xml-reference-s14.md) file to point to your push-button reset extensibility scripts. 
 
+This file must be saved with the file type of **UTF-8**. Do not use ANSI coding. For example: in Notepad, click **File**, and then click **Save As**. In the **Encoding** box, select **UTF-8**. 
 
-**To create extensibility scripts**
+Save this file and copy it into the Windows images as `C:\Recovery\OEM\ResetConfig.xml`. 
 
--   In Notepad, you can create custom scripts to save or retrieve log files, check partitions, and to install applications.
+You can use the same ResetConfig.xml file to configure Windows to create recovery media. For more information, see [Deploy Push-Button Reset Features](deploy-push-button-reset-features.md).
 
-    **Important**  
-    Your scripts must meet the following requirements:
+There's four [extensibility points](#extensibility_points) that you can use to point to scripts that run near the beginning and end of the **Keep my files** or **Remove everything** operations. For common customizations, you usually only need a single script, as shown in the [sample script](#preserving_and_retrieving_files) below. 
 
-    -   The scripts are formatted as a .cmd or .exe files.
-    -   The scripts do not depend on Windows PE optional components not present in the default Windows RE image (winre.wim).
-    -   The scripts do not depend on binaries (e.g. .exe or .dll files) not present in the default Windows RE image (winre.wim).
-    -   The scripts run without displaying a graphical user interface (GUI).
-    -   The scripts complete all intended functions within 5 minutes for each extensibility point.
-    -   The script must not modify the drive letters. This can potentially cause the recovery to fail.
+## <span id="restore_common_options"></span>Sample script: restore the Start Menu, Taskbar, OOBE, and unattend.xml customizations
 
-    Your scripts must return a 0 (zero), if successful. If push-button reset receives a non-0 value, the following steps occur:
+Save the following into the `C:\Recovery\OEM` folder:
+* The sample script, **CommonCustomizations.cmd**
+* The push-button reset configuration file, **ResetConfig.xml**
+* A copy of the Start menu configuration file (**LayoutModification.xml**)
+* A copy of the Taskbar configuration file (**TaskbarLayoutModification.xml**)
+* A copy of the **unattend.xml** file
 
-    -   **If running the Refresh your PC feature**: All system changes are rolled back. If the script or executable file is initiated from the Windows **PC settings** menu, the system reboots in Windows. If the script or executable file is initiated from Windows RE or the **Boot Options** menu, the system remains in Windows RE and displays an error message.
+Save the following into the `C:\Recovery\OEM\OOBE\Info` folder:
+* A copy the entire **OOBE** folder, `%WINDIR%\System32\Oobe\Info\`. 
 
-    -   **If running the Reset your PC feature**: The failure is ignored. The script or executable file proceeds to the next step in the reset process and logs the failure.
+**CommonCustomizations.cmd**
+```
+rem CommonCustomizations.cmd
 
-    You can use the following locations for storage, if needed.
+rem Define %TARGETOS% as the Windows folder (This later becomes C:\Windows) 
+for /F "tokens=1,2,3 delims= " %%A in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\RecoveryEnvironment" /v TargetOS') DO SET TARGETOS=%%C
 
-    -   **Windows PE RAM drive (X:)**. This virtual drive is created by Windows PE, and stays active during the **Refresh your PC** process. You can use it with the **Refresh your PC** feature to save data before the partition is refreshed, and to restore the data after the partition refresh is complete. The amount of available memory is limited to the amount of RAM on the system, minus the amount of RAM needed for the Windows RE tools when fully expanded. For instructions about mounting Windows RE and determining the fully-expanded file size, see [Customize Windows RE](customize-windows-re.md).
+rem Define %TARGETOSDRIVE% as the Windows partition (This later becomes C:)
+for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
 
-    -   **Designated OEM partition**. You can leave extra room on a partition. For example, you can leave room on the recovery image partition, and use scripts to temporarily assign a drive letter and then save files to that partition. However, if your user uses the recovery media to repartition the disks, the data on these partitions might be lost during the recovery process.
+rem Add back Windows settings, Start menu, Taskbar, and OOBE.xml customizations
+copy "%TARGETOSDRIVE%\Recovery\OEM\Unattend.xml" "%TARGETOS%\Panther\Unattend.xml" /y
+copy "%TARGETOSDRIVE%\Recovery\OEM\LayoutModification.xml" "%TARGETOSDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml" /y
+copy "%TARGETOSDRIVE%\Recovery\OEM\TaskbarLayoutModification.xml" "%TARGETOS%\OEM\TaskbarLayoutModification.xml" /y
+xcopy "%TARGETOSDRIVE%\Recovery\OEM\OOBE\Info" "%TARGETOS%\System32\Info\" /s
 
+rem Recommended: Create a pagefile for devices with 1GB or less of RAM.
+wpeutil CreatePageFile /path=%TARGETOSDRIVE%\PageFile.sys /size=256
 
+EXIT 0
+```
 
-~~~
-**Example 1: Saving Log Files**
+**ResetConfig.xml**: Note, this example points to the same script twice, so it can be used by both the **Keep my files** or **Remove everything** features. 
 
-This example script preserves files that would otherwise be removed, by placing them in a temporary location in memory, to be retrieved by another sample script, **RetrieveLogFiles.cmd**.
+```
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ResetConfig.xml -->
+<Reset>
+  <Run Phase="BasicReset_AfterImageApply">
+    <Path>CommonCustomizations.cmd</Path>
+    <Duration>2</Duration>
+  </Run>
+  <Run Phase="FactoryReset_AfterImageApply">
+    <Path>CommonCustomizations.cmd</Path>
+    <Duration>2</Duration>
+  </Run>
+  <!-- May be combined with Recovery Media Creator
+       configurations – insert SystemDisk element here -->
+</Reset>
+```
+
+## <span id="preserving_and_retrieving_files"></span>Preserving and retrieving files
+
+With the **Keep my files** feature, you can use sample scripts to preserve files that would otherwise be removed, by placing them in a temporary location in memory. You cannot keep files with the **Remove everything** feature.
+
+You can use the following locations for storage, if needed.
+
+- **Windows PE RAM drive (X:)**. This virtual drive is created by Windows PE, and stays active during the **Keep my files** process. You can use it with the **Keep my files** feature to save data before the partition is refreshed, and to restore the data after the partition refresh is complete. The amount of available memory is limited to the amount of RAM on the system, minus the amount of RAM needed for the Windows RE tools when fully expanded. For instructions about mounting Windows RE and determining the fully-expanded file size, see [Customize Windows RE](customize-windows-re.md).
+
+- **Designated OEM partition**. You can leave extra room on a partition. For example, you can leave room on the recovery image partition, and use scripts to temporarily assign a drive letter and then save files to that partition. However, if your user uses the recovery media to repartition the disks, the data on these partitions might be lost during the recovery process.
+
+These sample scripts preserve the Windows log files. Save these scripts in the `C:\Recovery\OEM` folder.
+
+**ResetConfig.xml**
+```
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ResetConfig.xml -->
+   <Reset>
+      <Run Phase="BasicReset_BeforeImageApply">
+         <Path>SaveLogFiles.cmd</Path>
+         <Duration>4</Duration>
+      </Run>      
+      <Run Phase="BasicReset_AfterImageApply">
+         <Path>RetrieveLogFiles.cmd</Path>
+         <Duration>2</Duration>
+      </Run>
+      <!-- May be combined with Recovery Media Creator
+       configurations – insert SystemDisk element here -->
+   </Reset>
+```
+
+**SaveLogFiles.cmd**: Saves log files to a temporary folder in memory
 
 ```
 :rem == SaveLogFiles.cmd
-
-:rem == This sample script preserves files that would 
-:rem    otherwise be removed by placing them in a 
-:rem    temporary location in memory, to be retrieved by
-:rem    RetrieveLogFiles.cmd.
 
 :rem == 1. Use the registry to identify the location of
 :rem       the new operating system and the primary hard
@@ -85,16 +153,14 @@ for /F "tokens=1,2,3 delims= " %%A in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\M
 
 for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
 
-:rem == 2. Copy old logs to a temporary folder in memory
+:rem == 2. Copy old Windows logs to a temporary folder in memory
 mkdir X:\Temp
-xcopy %TARGETOS%\Logs\*.* X:\temp /cherkyi
+xcopy %TARGETOS%\Logs\*.* X:\temp\OldLogs /cherkyi
 
 EXIT 0
 ```
 
-**Example 2: Retrieving Log Files**
-
-This sample script retrieves the files that were saved in memory by the `SaveLogFiles.cmd` script, and adds them back to the system. It also runs a system diagnostic, and then sends the output to the C:\\Fabrikam folder.
+**RetrieveLogFiles.cmd**: Retrieves the files that were saved in memory by the SaveLogFiles.cmd script. 
 
 ```
 :rem == RetrieveLogFiles.cmd
@@ -103,10 +169,6 @@ This sample script retrieves the files that were saved in memory by the `SaveLog
 :rem    were saved in memory by 
 :rem    SaveLogFiles.cmd,
 :rem    and adds them back to the system.
-:rem
-:rem    It also runs a system diagnostic, and sends the output
-:rem    to the C:\Fabrikam folder.
-
 
 :rem == 1. Use the registry to identify the location of
 :rem       the new operating system and the primary drive.
@@ -121,135 +183,60 @@ for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
 :rem == 2. Copy the old logs to the new OS 
 :rem       at C:\Windows\OldLogs
 mkdir %TARGETOS%\OldLogs
-xcopy X:\Temp\*.* %TARGETOS%\OldLogs /cherkyi
-
-:rem == 3. Run system diagnostics using the
-:rem       DirectX Diagnostic tool, and save the 
-:rem       results to the C:\Fabrikam folders. ==
-
-mkdir %TARGETOSDRIVE%\Fabrikam
-%TARGETOS%\system32\dxdiag.exe /whql:off /t %TARGETOSDRIVE%\Fabrikam\DxDiag-TestLogFiles.txt
+xcopy X:\Temp\OldLogs\* %TARGETOS%\OldLogs /cherkyi
 
 EXIT 0
 ```
-~~~
 
-**To create a push-button reset configuration file**
+## <span id="extensibility_points"></span>Extensibility points
 
-1.  In Notepad, create a configuration file (ResetConfig.xml) that points to your push-button reset extensibility scripts. For more information about this file, see [ResetConfig XML Reference](resetconfig-xml-reference-s14.md).
+The **Keep my files** feature can be summarized in the following steps:
 
-    ```
-    <?xml version="1.0" encoding="utf-8"?>
-    <!-- ResetConfig.xml -->
-       <Reset>
-          <Run Phase="BasicReset_BeforeImageApply">
-             <Path>SaveLogFiles.cmd</Path>
-             <Duration>4</Duration>
-          </Run>      
-          <Run Phase="BasicReset_AfterImageApply">
-             <Path>RetrieveLogFiles.cmd</Path>
-             <Duration>2</Duration>
-          </Run>
-          <Run Phase="FactoryReset_AfterDiskFormat">
-             <Path>CheckPartitions.exe</Path>
-             <Duration>2</Duration>
-          </Run>
-          <Run Phase="FactoryReset_AfterImageApply">
-             <Path>InstallApps.cmd</Path>
-             <Param>/allApps</Param>
-             <Duration>2</Duration>
-          </Run>
-          <!-- May be combined with Recovery Media Creator
-               configurations – insert SystemDisk element here -->
-       </Reset>
-    ```
+1.  PC boots into the Windows Recovery Environment (Windows RE).
+2.  **EXTENSIBILITY POINT A** (**BasicReset_BeforeImageApply**): Add a script here to copy files, drivers, or settings that are not migrated by default when the user runs the **Keep my files** feature.
+3.  User accounts, settings, and data are gathered and moved to a temporary location.
+4.  A new copy of the OS is constructed in a temporary location using files from the Windows Component Store.
+5.  Customizations stored in provisioning packages under C:\\Recovery\\Customizations are applied to the new OS.
+6.  Drivers are copied from the existing OS and injected into the new OS.
+7.  Preinstalled Windows apps are restored from their backup location.
+8.  System-critical settings are applied to the new OS.
+9.  Existing OS is moved to C:\\Windows.old.
+10. New OS is moved to the root of the OS volume.
+11. **EXTENSIBILITY POINT B** (**BasicReset_AfterImageApply**): Add a script here to restore customization files (unattend.xml, layoutmodification.xml), or restore files and settings you might have backed up at extensibility point A.
+12. PC reboots to the new OS.
+13. During first boot, user data and settings are reapplied.
 
-    Where SaveLogFiles.cmd, RetrieveLogFiles.cmd, CheckPartitions.exe, and InstallApps.cmd are all fictional scripts.
+The **Remove everything** feature can be summarized in the following steps:
 
-2.  Click **File**, and then click **Save As**. In the **Encoding** box, select **UTF-8**, and save this file as E:\\Recovery\\RecoveryImage\\ResetConfig.xml.
+1.  PC boots into the Windows Recovery Environment (Windows RE).
+2.  User accounts, data and installed Windows apps and Windows desktop applications are removed from the OS volume.
+3.  Data volumes are formatted (if requested by the user).
+4.  Data erasure is performed on OS and data volumes (if requested by the user).
+5.  **EXTENSIBILITY POINT C** (**FactoryReset_AfterDiskFormat**): Add a script here to reconfigure data partitions if needed. <strong>Important</strong>: Do not modify the Windows partition.
+6.  A new copy of the OS is constructed in a temporary location using files from the Windows Component Store.
+7.  Customizations stored in provisioning packages under C:\\Recovery\\Customizations are applied to the new OS.
+8.  Drivers are copied from the existing OS and injected into the new OS.
+9.  Preinstalled Universal Windows apps are restored from their backup location.
+10. Existing OS is removed.
+11. New OS is moved to the root of the OS volume.
+12. **EXTENSIBILITY POINT D** (**FactoryReset_AfterImageApply**): Add a script here to restore customization files (unattend.xml, layoutmodification.xml).
+13. PC reboots to the new OS.
+14. OOBE starts.
 
-    Where *E* is the drive letter of a USB flash drive or other removable media. Do not use ANSI coding.
+## Alternate method: copy scripts after deployment
 
-    **Note**  
-    You can use the same ResetConfig.xml file to configure Windows to create recovery media. For more information, see [Deploy Push-Button Reset Features](deploy-push-button-reset-features.md).
+A short time after your user completes OOBE, the recovery scripts are moved from the `C:\Recovery\OEM` folder to the recovery partition, at `R:\RecoveryImage\`.
 
-
-
-## <span id="bkmk_4"></span><span id="BKMK_4"></span>Step 2: Adding Configuration Files and Scripts to the Destination Computer
+In the unlikely event that push-button reset is used before this operation has taken place, these scripts may not run. To prevent that possibility, you can copy your recovery files directly to the recovery partition, `R:\RecoveryImage\` after your image has been deployed.
 
 
-**To add your configuration files and scripts**
-
-1.  On your destination computer, insert the USB flash drive with the configuration files.
-
-2.  Copy the configuration files to the destination computer
-
-    ```
-    Copy E:\Recovery\RecoveryImage\* R:\RecoveryImage\*
-    ```
-
-    where *E* is the drive letter of the USB flash drive.
-
-## <span id="Sample_script__making_sure_unattend.xml__LayoutModification.xml__and_OOBE.xml_are_kept_during_a_reset"></span><span id="sample_script__making_sure_unattend.xml__layoutmodification.xml__and_oobe.xml_are_kept_during_a_reset"></span><span id="SAMPLE_SCRIPT__MAKING_SURE_UNATTEND.XML__LAYOUTMODIFICATION.XML__AND_OOBE.XML_ARE_KEPT_DURING_A_RESET"></span>Sample script: making sure unattend.xml, LayoutModification.xml, and OOBE.xml are kept during a reset
-
-
-Windows doesn't automatically save settings created through unattend.xml setup files, nor Windows Start Menu customizations created with LayoutModification.xml during a full-system reset, nor first-login info from oobe.xml. To make sure your customizations are saved, that includes steps to put the unattend.xml, LayoutModification.xml, and oobe.xml files back into place.
-
-Here's some sample scripts that show how to retain these settings and put them back into the right spots.
-
-Save copies of unattend.xml, LayoutModification.xml, oobe.xml, plus these two text files, in C:\\Recovery\\OEM\\.
-
-**ResetConfig.xml:**
-
-```
-<?xml version="1.0" encoding="utf-8"?>
-<!-- ResetConfig.xml -->
-<Reset>
-  <Run Phase="BasicReset_AfterImageApply">
-    <Path>EnableCustomizations.cmd</Path>
-    <Duration>2</Duration>
-  </Run>
-  <Run Phase="FactoryReset_AfterImageApply">
-    <Path>EnableCustomizations.cmd</Path>
-    <Duration>2</Duration>
-  </Run>
-</Reset>
-```
-
-**EnableCustomizations.cmd:**
-
-```
-rem EnableCustomizations.cmd
-
-rem Define %TARGETOS% as the Windows folder (This later becomes C:\Windows) 
-for /F "tokens=1,2,3 delims= " %%A in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\RecoveryEnvironment" /v TargetOS') DO SET TARGETOS=%%C
-
-rem Define %TARGETOSDRIVE% as the Windows partition (This later becomes C:)
-for /F "tokens=1 delims=\" %%A in ('Echo %TARGETOS%') DO SET TARGETOSDRIVE=%%A
-
-rem Add back Windows settings, Start menu, and OOBE.xml customizations
-copy "%TARGETOSDRIVE%\Recovery\OEM\Unattend.xml" "%TARGETOS%\Panther\Unattend.xml" /y
-copy "%TARGETOSDRIVE%\Recovery\OEM\LayoutModification.xml" "%TARGETOSDRIVE%\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml" /y
-xcopy "%TARGETOSDRIVE%\Recovery\OEM\OOBE\Info" "%TARGETOS%\System32\Info\" /s
-
-rem Recommended: Create a pagefile for devices with 1GB or less of RAM.
-wpeutil CreatePageFile /path=%TARGETOSDRIVE%\PageFile.sys /size=256
-```
-
-For multilingual deployments, OOBE.xml uses a more complicated folder structure. It's OK to just copy the entire folder into C:\\Recovery\\OEM, and then modify the script to copy the entire folder:
-
-```
-xcopy "%ScriptFolder%\Info\" "%TargetOSDrive%\System32\Info\" /s
-```
-
-## <span id="Next_Steps"></span><span id="next_steps"></span><span id="NEXT_STEPS"></span>Next Steps
-
+## Next steps
 
 Now that you have customized the push-button reset experience, you can deploy the recovery image for push-button reset (Install.wim) to the recovery image partition.
 
 To copy the Diskpart script, the ResetConfig.xml file, and the push-button reset recovery image (install.wim) to the recovery image partition of the destination PC, follow the instructions in the [Deploy Push-Button Reset Features](deploy-push-button-reset-features.md) topic.
 
-## <span id="related_topics"></span>Related topics
+## Related topics
 
 
 [Push-Button Reset Overview](push-button-reset-overview.md)

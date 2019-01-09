@@ -4,8 +4,7 @@ Description: 'Features on Demand v2 (Capabilities), introduced in Windows 10, a
 ms.assetid: 6390f427-a201-487e-928f-964e7b84327c
 MSHAttr: 'PreferredLib:/library/windows/hardware'
 title: 'Features On Demand'
-
-ms.date: 06/27/2018
+ms.date: 12/19/2018
 ms.topic: article
 ms.custom: RS5
 ---
@@ -25,15 +24,15 @@ You can also preinstall FODs so they're ready if a user needs them. FODs are dis
 
 Starting with Windows 10, version 1809, Windows has two different types of Features on Demand:
 
-| FOD type | Description | DISM Command |
-| ---- | ---- | ---- |
-| FODs without satellite packages | FODs with all language resources packaged into the same package. These FODs are distributed as a single .cab file. | `/add-package` or `/add-capability` |
-| FODs with satellite packages | Language-neutral FODs that have language and/or architecture resources in separate packages (satellites). When you install this type of FOD, only the packages that apply to the Windows image are installed, which reduces disk footprint. These FODs are distributed as a set of several .cab files, but are installed by specifying a single `/capabilityname` These are new starting in Windows 10, version 1809. | `/add-capability`  |
+* **FODs without satellite packages**: FODs with all language resources packaged into the same package. These FODs are distributed as a single .cab file. 
 
-- To install a Feature on Demand that has satellite packages, you have to add the feature on demand with `DISM /add-capability`, specifying the capability name. Unlike FODs without satellites, these new FODs can't be added as packages (`DISM /add-package`). 
+  They can be added using either DISM `/Add-Capability` or `/Add-Package`.
 
-- When adding a FOD with `/add-capability` to an offline image, you also have to specify a source with the `/source` option. You can use a mounted FOD ISO as the source, or you can create a FOD repository on local or network storage.
+* **FODs with satellite packages**: Language-neutral FODs that have language and/or architecture resources in separate packages (satellites). When you install this type of FOD, only the packages that apply to the Windows image are installed, which reduces disk footprint. These FODs are distributed as a set of several .cab files, but are installed by specifying a single `/capabilityname`. These are new for Windows 10, version 1809.
 
+  They can only be added using `DISM /Add-Capability` (and not `/Add-Package`). 
+  
+  FODs with satellites require a well-formed FOD repository. This can either be the full FOD repository on the ISO, or a custom repository created with `DISM /export-source`. They cannot be added by pointing to a directory with a handful of FOD files hand-copied from the repository, because DISM requires additional metadata to make the right connections.
 
 See [Available Features on demand](features-on-demand-non-language-fod.md) for more information about which FODs have satellites. Language FODs don't have satellites.
 
@@ -53,9 +52,7 @@ OEMs can generally add FODs to their Windows images using `DISM /add-package`, u
 | /add-package | Adds a package, including a FOD .cab to an image. `add-package` can only be used to add FODs that don't have satellite packages. | `DISM.exe /image:C:\mount\Windows /add-package /packagepath:E:\Microsoft-Windows-Holographic-Desktop-FOD-Package~31bf3856ad364e35~amd64~~.cab` |
 | /Get-Packages | Get a list of all packages in an image. | `DISM /image:C:\Mount\Windows /get-packages` |
 | /Get-Packageinfo | Get information of a package in an image. | `DISM /image:C:\mount\Windows /get-packageInfo /packagename:Microsoft-Windows-Xps-Xps-Viewer-Opt-Package~31bf3856ad364e35~amd64~~10.0.17134.1000` |
-| /Remove-Package | <p>Removes a package from an image.</p>**Note**: Don't remove a package that other packages depend on. For example, if you have the French handwriting and basic packages installed, don't remove the basic package.</p> | `DISM.exe /image:C:\mount\Windows /remove-capability /CapabilityName:Microsoft-Windows-Xps-Xps-Viewer-Opt-Package~31bf3856ad364e35~amd64~~10.0.17134.1000` |
-
-
+| /Remove-Package | Removes a package from an image. Note: Don't remove a package that other packages depend on. For example, if you have the French handwriting and basic packages installed, don't remove the basic package. | `DISM.exe /image:C:\mount\Windows  /Remove-Package /PackageName:Microsoft.Windows.Calc.Demo~6595b6144ccf1df~x86~en~1.0.0.0` |
 
 ### Using DISM /add-capability to add or remove FODs
 

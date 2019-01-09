@@ -8,9 +8,9 @@ title: Create and Manage a Windows Image Using DISM
 ms.date: 05/02/2017
 ms.topic: article
 
-
+redirect_url: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/capture-and-apply-an-image
 ---
-
+<!--
 # Create and Manage a Windows Image Using DISM
 
 
@@ -67,7 +67,7 @@ You can use DISM servicing commands to install, uninstall, configure, and update
 
  
 
- 
+ -->
 
 
 

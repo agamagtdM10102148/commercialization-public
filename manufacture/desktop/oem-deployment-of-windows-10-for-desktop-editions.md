@@ -1767,7 +1767,7 @@ Your PC will restart and boot into Windows for the first time.
 
 ### Verify Recovery
 
-1. Verify that your customizations are restored after recovery, and that they continue to function by running the Refresh your PC and Reset your PC features from the following entry points: 
+1. Verify that your customizations are restored after recovery, and that they continue to function by running the Keep my files and Remove everything features from the following entry points: 
    - Settings 
    a.  From the Start Menu, click Settings, 
    b.  In the Settings app, click Update & security, and then click Recovery. 
@@ -1784,7 +1784,7 @@ Your PC will restart and boot into Windows for the first time.
    d. From the Choose an option screen, click Troubleshoot 
    e. Click Recover from a drive and then follow the on-screen instructions 
 
-**Note:** The Push-button reset UI has been redesigned in Windows 10. The Keep my files option in the UI now corresponds to the Refresh your PC feature. Remove everything corresponds to the Reset your PC feature.
+**Note:** The Push-button reset UI has been redesigned in Windows 10. The Keep my files option in the UI now corresponds to the Keep my files feature. Remove everything corresponds to the Remove everything feature.
 
 ## Optimize final image
 
