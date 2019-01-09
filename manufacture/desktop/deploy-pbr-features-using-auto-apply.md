@@ -297,7 +297,7 @@ Verify that your customizations are restored after recovery, and that they conti
 
 * **Windows RE**: From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Advanced startup: **Restart now**. After Windows RE boots, select **Troubleshoot** > **Reset this PC** and then follow the on-screen instructions.
 
-To test more recovery options, see [validation scenarios](desktop/pbr-validation.md).
+To test more recovery options, see [validation scenarios](pbr-validation.md).
 
 ## <span id="related_topics"></span>Related topics
 

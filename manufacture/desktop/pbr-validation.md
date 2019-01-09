@@ -120,7 +120,7 @@ ms.topic: article
 <li><p>Create a USB recovery drive and attach to the device</p></li>
 <li><p>Boot the device using the USB recovery drive</p></li>
 <li><p>Once booted to the USB recovery drive, select language and keyboard</p></li>
-<li><p>Select Troubleshoot > Reset this PC: Get started > Remove everything</p></li>
+<li><p>Select Troubleshoot > Reset this PC > Remove everything</p></li>
 <li><p>When prompted, choose "Just remove my files" and follow the on-screen instructions</p></li>
 </ol></td>
 

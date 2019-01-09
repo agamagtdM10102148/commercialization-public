@@ -21,7 +21,7 @@ Push-button reset features are included with Windows 10 for desktop editions (H
 
 These steps also show you how to add your own scripts during a reset to capture logs or perform other cleanup tasks.
 
-## <span id="Prerequisites"></span><span id="prerequisites"></span><span id="PREREQUISITES"></span>Prerequisites
+## Prerequisites
 
 
 To complete these procedures, you'll need a technician PC which has Windows 10 and the following Windows Assessment and Deployment Kit (ADK) for Windows 10 components installed. Note that starting with Windows 10, version 1809, WinPE is an addon to the ADK, and isn't included in the ADK installer:
@@ -499,7 +499,7 @@ Verify that your customizations are restored after recovery, and that they conti
 
 * **Windows RE**: From the Start Menu, select **Settings** > **Update & security** > **Recovery** > Advanced startup: **Restart now**. After Windows RE boots, select **Troubleshoot** > **Reset this PC** and then follow the on-screen instructions.
 
-To test more recovery options, see [validation scenarios](desktop/pbr-validation.md).
+To test more recovery options, see [validation scenarios](pbr-validation.md).
 
 ## <span id="related_topics"></span>Related topics
 
@@ -508,13 +508,3 @@ To test more recovery options, see [validation scenarios](desktop/pbr-validation
 [Bare metal reset/recovery: Create recovery media while deploying new devices](create-media-to-run-push-button-reset-features-s14.md)
 
 [Deploy push-button reset features using ScanState](http://go.microsoft.com/fwlink/?LinkId=615126)
-
- 
-
- 
-
-
-
-
-
-
