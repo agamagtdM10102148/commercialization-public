@@ -42,10 +42,10 @@
     },
     "fileMetadata": { 
       "author":
-      {"*.md": "eliotseattle" 
+      {"**/*.md": "eliotseattle" 
       },
       "ms.author": 
-      {"*.md" : "eliotgra"
+      {"**/*.md" : "eliotgra"
       }
       },
     "template": [],
