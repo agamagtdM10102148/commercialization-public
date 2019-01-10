@@ -1,13 +1,7 @@
 ---
 title: Windows Assessment Toolkit
 description: The Windows Assessment Toolkit helps you determine the quality of a running operating system or a set of components with regard to performance, reliability, and functionality.
-MSHAttr:
-- 'PreferredSiteName:MSDN'
-- 'PreferredLib:/library/windows/hardware'
 ms.assetid: 0aeb9e67-3ee1-445d-a8f7-3ef6eb7675e0
-ms.mktglfcycl: plan
-ms.sitesec: msdn
-
 ms.date: 05/05/2017
 ms.topic: article
 
