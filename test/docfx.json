@@ -47,7 +47,7 @@
       {"**/*.md": "dawnwood" 
       },
       "ms.author": 
-      {"**/*.md" : "dawn.wood"
+      {"**/*.md" : "dawnwood"
       }},
     "template": [],
     "dest": "oem-test",
