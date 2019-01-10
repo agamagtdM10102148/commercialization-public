@@ -47,11 +47,6 @@ The Windows Assessment Toolkit includes the tools that you need to assess a loca
 <td><p>Learn how the Windows Assessment Console works, and how you can use it to configure and run assessments on a local computer.</p></td>
 </tr>
 <tr class="odd">
-<td><p><a href="windows-assessment-services-technical-reference.md" data-raw-source="[Windows Assessment Services](windows-assessment-services-technical-reference.md)">Windows Assessment Services</a></p></td>
-<td><p>Learn how to use the Windows Assessment Services to automate running assessments; eliminate fragmented, error-prone, expensive pre-deployment processes; and replace multiple steps and tools with just one tool.</p>
-<p>Windows Assessment Services is included with the Windows ADK.</p></td>
-</tr>
-<tr class="even">
 <td><p><a href="windows-assessment-toolkit-technical-reference.md" data-raw-source="[Windows Assessment Toolkit Technical Reference](windows-assessment-toolkit-technical-reference.md)">Windows Assessment Toolkit Technical Reference</a></p></td>
 <td><p>View the assessments and the command-line syntax for the assessment platform.</p></td>
 </tr>
