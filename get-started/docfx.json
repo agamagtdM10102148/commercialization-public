@@ -41,12 +41,11 @@
     },
     "fileMetadata": {
       "author":
-      {"*.md": "dawnwood" 
+      {"**/*.md": "dawnwood" 
       },
       "ms.author": 
-      {"*.md" : "dawn.wood"
+      {"**/*.md" : "dawn.wood"
       }
-
     },
     "template": [],
     "dest": "oem-get-started",

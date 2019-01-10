@@ -42,10 +42,10 @@
     },
     "fileMetadata": {
       "author":
-      {"*.md": "themar-msft" 
+      {"**/*.md": "themar-msft" 
       },
       "ms.author": 
-      {"*.md" : "themar"
+      {"**/*.md" : "themar"
       }
 
     },
