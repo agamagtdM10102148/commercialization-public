@@ -70,11 +70,11 @@ Some product editions or edition/processor configurations listed below may have 
 
 ## Windows Server
 
-| Windows Edition | Intel Processors | AMD Processors |
-|-|-|-|
-| Windows Server 2012 R2\* | Up through the following 7th Generation Intel Processors (Intel Core i3-7xxx/Celeron/Pentium; Xeon E3 v6); Xeon SP 31xx, 41xx, 51xx, 61xx, and 81xx; Xeon D 15xx; and Atom C33xx | Up through the following AMD 7th generation processors (AMD A-Series Ax-9xxx & E-Series Ex-9xxx & FX-9xxx), AMD Ryzen Family, and AMD EPYC 7xxx |
-| Windows Server 2016\*\* | Up through the following 8th Generation Intel Processors (Core i3-8xxx, Pentium G5xxx, Celeron G49xx); Xeon E22xx; Xeon SP 31xx, 41xx, 51xx, 61xx, and 81xx; Xeon D 21xx; and Atom C33xx | Up through the following AMD 7th generation processors (AMD A-Series Ax-9xxx & E-Series Ex-9xxx & FX-9xxx), AMD Ryzen Family, and AMD EPYC 7xxx |
-| Windows Server 2019 | Up through the following 8th Generation Intel Processors (Core i3-8xxx, Pentium G5xxx, Celeron G49xx); Xeon E22xx; Xeon SP 31xx, 41xx, 51xx, 61xx, and 81xx; Xeon D 21xx; and Atom C33xx | Up through the following AMD 7th generation processors (AMD A-Series Ax-9xxx & E-Series Ex-9xxx & FX-9xxx), AMD Ryzen Family, and AMD EPYC 7xxx |
+| Windows Edition | Intel Processors | AMD Processors | Hygon Processors |
+|-|-|-|-|
+| Windows Server 2012 R2\* | Up through the following 7th Generation Intel Processors (Intel Core i3-7xxx/Celeron/Pentium; Xeon E3 v6); Xeon SP 31xx, 41xx, 51xx, 61xx, and 81xx; Xeon D 15xx; and Atom C33xx | Up through the following AMD 7th generation processors (AMD A-Series Ax-9xxx & E-Series Ex-9xxx & FX-9xxx), AMD Ryzen Family, and AMD EPYC 7xxx | N/A |
+| Windows Server 2016\*\* | Up through the following 8th Generation Intel Processors (Core i3-8xxx, Pentium G5xxx, Celeron G49xx); Xeon E22xx; Xeon SP 31xx, 41xx, 51xx, 61xx, and 81xx; Xeon D 21xx; and Atom C33xx | Up through the following AMD 7th generation processors (AMD A-Series Ax-9xxx & E-Series Ex-9xxx & FX-9xxx), AMD Ryzen Family, and AMD EPYC 7xxx | N/A |
+| Windows Server 2019 | Up through the following 8th Generation Intel Processors (Core i3-8xxx, Pentium G5xxx, Celeron G49xx); Xeon E22xx; Xeon SP 31xx, 41xx, 51xx, 61xx, and 81xx; Xeon D 21xx; and Atom C33xx | Up through the following AMD 7th generation processors (AMD A-Series Ax-9xxx & E-Series Ex-9xxx & FX-9xxx), AMD Ryzen Family, and AMD EPYC 7xxx | Hygon C86 7xxx |
 
 \*Company may submit for certification (in the Windows Hardware Compatibility Program) Customer Systems running Windows Server 2012R2 and the identified processors until December 31, 2018; after such date, no new Customer Systems will be certified running Windows Server 2012R2. 
 
