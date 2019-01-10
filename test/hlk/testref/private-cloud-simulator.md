@@ -845,6 +845,21 @@ Make sure you initial pagefile size is greater than 50GB. A dump file wont get c
 
 Please send email to [pvsha@microsoft.com](mailto://pvsha@microsoft.com) for any queries related to PCS or WSSD, AzureStack hardware certification.
 
+### ComputeNodeBugcheckAction failed 
+Error message: "System.TimeoutException: Timed out while trying to reboot <MachineName>"
+
+Troubleshoot Steps: 
+
+* Go to **MachineName**
+* Verify that secure boot is disabled. 
+  * Confirm-SecureBootUEFI cmdlet returns false.
+* Verify that TESTSIGNING is enabled. 
+  * Run BCDEDIT.exe tool. TESTSIGNING is listed as YES under **current** Windows Boot Loader.
+* Verify that Bugchecker.exe works. 
+  * A folder called c:\LmTestBinaries should already exist on the node. If not copy bugchecker files from PCS machine. Exampel: xcopy \\MachineName\c$\pcs\bugchecker* c:\LmTestBinaries
+  * After running the following command, machine should bluescreen and auto restart itself. If machine doesn't bluescreen, your files may be corrupted.
+  * c:\LmTestBinaries\Bugchecker.exe bugcheck 
+
 ## <span id="Appendix__Software_Defined_Datacenter__SDDC__Additional_Qualifiers__AQs_"></span><span id="appendix__software_defined_datacenter__sddc__additional_qualifiers__aqs_"></span><span id="APPENDIX__SOFTWARE_DEFINED_DATACENTER__SDDC__ADDITIONAL_QUALIFIERS__AQS_"></span>Appendix: Software Defined Datacenter (SDDC) Additional Qualifiers (AQs)
 
 All server systems and components used in Windows Server 2019 WSSD offers must be certified for the Windows Server 2019 logo and meet the Windows Server 2019 Software-Defined Data Center (SDDC) additional qualifiers (AQs). The required HLK Feature names are listed in the table below.
