@@ -15,6 +15,8 @@ ms.topic: article
 
 Cortana voice walks the user through the OOBE experience, enabling the user to complete parts of OOBE by responding to spoken prompts. Cortana voice during OOBE is currently available in the following languages: **en-US**, **es-MX**, **ja-JP**, **en-GB**, **fr-FR**, **it-IT**, **de-DE**, **es-ES**, **fr-CA**, **en-CA**, **en-AU**, **pt-BR**, **zh-CN**.
 
+Note: With build 18309 and Windows 10 19H1 and later, the Cortana voice-over will be disabled by default on Windows 10 Pro, Enterprise, and Education. The Cortana voice-over will still be enabled for Windows 10 Home editions.
+
 The `language` value you set in OOBE.xml impacts the voice used during OOBE. The OOBE.xml value for `language` must be a language/region decimal ID associated with a Windows language pack. For example, the **English (United States)** language pack has an associated language/region decimal ID of **1033**. For a full list of language/region decimal IDs that you can set in OOBE.xml, see [Available Language Packs for Windows](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows).
 
 Cortana voice is enabled after the customer selects a language from the Language selection screen in OOBE. If the language selected by the customer, combined with the `language` in OOBE.xml, is supported by Cortana, Cortana will assist in that language upon entering the Region selection page.
